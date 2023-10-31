@@ -1,0 +1,84 @@
+[tool.poetry]
+name = "diqu"
+version = "0.0.3"
+description = "CLI companion tool to support dq-tools package"
+authors = ["IL <dat@infinitelambda.com>"]
+readme = "README.md"
+repository = "https://github.com/infinitelambda/dq-tools-cli"
+keywords = ["flake8", "markdown", "lint"]
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Quality Assurance",
+]
+packages = [
+  {include = "diqu"},
+  {include = "README.md"},
+]
+
+[tool.poetry.scripts]
+diqu = "diqu.__entrypoint__:main"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+rich-click = "^1.7.0"
+jira = "^3.5.2"
+pyyaml = "^6.0.1"
+slack-sdk = "^3.23.0"
+pandas = ">=1.0,<2.1"
+
+[tool.poetry.dev-dependencies]
+snowflake-connector-python = {version = "^3.3.1", extras = ["secure-local-storage", "pandas"]}
+pre-commit = "^2.17.0"
+poethepoet = "^0.16.4"
+black = "^23.7.0"
+flake8 = "^6.0.0"
+isort = "^5.12.0"
+autoflake = "^2.0.1"
+pytest = "^7.2.0"
+pytest-sugar = "^0.9.6"
+coverage = {version = "^6.5.0", extras = ["toml"]}
+tox = "^4.10.0"
+pdoc = "^14.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+multi_line_output = 3
+force_to_top = ["os"]
+profile = "black"
+skip_gitignore = true
+
+[tool.autoflake]
+recursive = true
+in-place = true
+remove-all-unused-imports = true
+ignore-init-module-imports = true
+remove-unused-variables = true
+ignore-pass-statements = false
+
+[tool.poe.tasks]
+git-hooks = { shell = "pre-commit install --install-hooks && pre-commit install --hook-type commit-msg" }
+format = [
+  {cmd = "autoflake ."},
+  {cmd = "black ."},
+  {cmd = "isort ."},
+]
+lint = [
+  {cmd = "black --check ."},
+  {cmd = "isort --check-only ."},
+  {cmd = "flake8 ."},
+]
+test = [
+  {cmd = "pytest ."},
+]
+test-cov = [
+  {cmd = "pytest --version"},
+  {cmd = "coverage run -m pytest ."},
+  {cmd = "coverage report --show-missing"},
+  {cmd = "coverage xml"},
+]

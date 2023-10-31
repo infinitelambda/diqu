@@ -1,0 +1,9 @@
+[flake8]
+extend-ignore = E203, E711
+max-line-length = 130
+exclude =
+    .venv,
+    venv,
+    __pycache__,
+    sm/include,
+    target

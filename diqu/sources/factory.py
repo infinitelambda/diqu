@@ -18,17 +18,18 @@ class SourceFactory:
         self.dbt_profile_dir = kwargs.get("profiles_dir") or (Path.home() / ".dbt")
         self.dbt_project_dir = kwargs.get("project_dir") or Path.cwd()
 
-        dbt_project_name = yml.load(
+        dbt_profile_name = kwargs.get("profile_name") or yml.load(
             file_path=f"{self.dbt_project_dir}/dbt_project.yml"
-        ).get("profile")
+        ).get("profile", "diqu")
+        dbt_profile_file_path = f"{self.dbt_profile_dir}/profiles.yml"
 
         with exception.handle_config_errors(
-            dbt_project_name,
-            f"Profile of {dbt_project_name} project is not found or wrong configs",
+            dbt_profile_file_path,
+            f"Profile [{dbt_profile_name}] is not found or a fault config",
         ):
-            dbt_profile_content = yml.load(
-                file_path=f"{self.dbt_profile_dir}/profiles.yml"
-            ).get(dbt_project_name)
+            dbt_profile_content = yml.load(file_path=dbt_profile_file_path).get(
+                dbt_profile_name
+            )
 
             connection_config = dbt_profile_content.get("outputs", {}).get(
                 kwargs.get("target") or dbt_profile_content.get("target")
@@ -38,7 +39,7 @@ class SourceFactory:
             self.connection = load_module(
                 name=module_name, package="diqu.sources"
             ).get_connection(config=connection_config)
-            logger.info(f"Using dbt project at: {self.dbt_project_dir}")
+            logger.info(f"Using dbt profile: {dbt_profile_name}")
             logger.info(f"Using dbt profiles.yml at: {self.dbt_profile_dir}")
             logger.info(f"Using {module_name} connection")
 

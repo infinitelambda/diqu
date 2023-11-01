@@ -125,7 +125,6 @@ class JiraBoard:
                 summary=row["JIRA_TICKET_SUMMARY"],
                 issuetype=dict(name=self.incident_type),
                 project=dict(id=self.project_id),
-                priority=dict(name="Medium"),
                 labels=[
                     "AutomaticAlert",
                     "diqu"
@@ -186,11 +185,10 @@ class JiraBoard:
         results = []
         for _, row in data.iterrows():
             logger.info(f"Updating {row['JIRA_ISSUE_KEY']}...")
-
             fields_list = self.__build_field_list(
                 data=data.loc[data["JIRA_ISSUE_KEY"] == row["JIRA_ISSUE_KEY"]]
-            )[0].pop("issuetype")
-
+            )[0]
+            fields_list.pop("issuetype")
             results.append(
                 self.conn.issue(row["JIRA_ISSUE_KEY"]).update(fields=fields_list)
             )

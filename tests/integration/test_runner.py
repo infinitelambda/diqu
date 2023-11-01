@@ -2,7 +2,9 @@ from unittest import mock
 
 import click
 import pytest
+
 from tests.integration.invocation import diquRunner
+
 
 class TestRunner:
     @pytest.fixture

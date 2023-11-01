@@ -1,4 +1,5 @@
 import click
+
 from diqu.cli.main import diqu
 
 

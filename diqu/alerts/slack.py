@@ -29,16 +29,20 @@ def alert(data, limit: int = 3) -> ResultCode:
         "  • ✅ $deperecated_count deprecation(s)"
     )
     template_incident = string.Template("[$index] $incident\n")
-    summary = template_sum.substitute(
-        date="N/A" if data.empty else data.iloc[0, 5],  # CHECK_TIMESTAMP
-        error_count=data[data["TEST_STATUS"] == "failed"].shape[0],
-        warn_count=data[data["TEST_STATUS"] == "warn"].shape[0],
-        pass_count=data[data["TEST_STATUS"] == "pass"].shape[0],
-        deperecated_count=data[data["TEST_STATUS"] == "deprecated"].shape[0],
+    summary = (
+        template_sum.substitute(
+            date=data["CHECK_TIMESTAMP"].iloc[0],
+            error_count=data[data["TEST_STATUS"] == "failed"].shape[0],
+            warn_count=data[data["TEST_STATUS"] == "warn"].shape[0],
+            pass_count=data[data["TEST_STATUS"] == "pass"].shape[0],
+            deperecated_count=data[data["TEST_STATUS"] == "deprecated"].shape[0],
+        )
+        if not data.empty
+        else "(No Data)"
     )
 
     incident_data = (
-        data[data["TEST_STATUS"] != "pass"]
+        data[(data["TEST_STATUS"] != "pass") & (data["TEST_STATUS"] != "deprecated")]
         .sort_values("PRIORITY", ascending=True)
         .head(limit)
     )
@@ -61,7 +65,7 @@ def alert(data, limit: int = 3) -> ResultCode:
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"👉 *Top {limit} Issues*:\n\n{incidents}",
+                    "text": f"👉 *Top {limit} Issues*:\n\n{incidents or '(No Data)'}",
                 },
             },
         ]

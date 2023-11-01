@@ -36,7 +36,7 @@ You can contribute to `diqu` by forking the `diqu` repository. For a detailed ov
 2. Clone your fork locally
 3. Check out a new branch for your proposed changes
 4. Push changes to your fork
-5. Open a pull request against `datnguye/diqu` from your forked repository
+5. Open a pull request against `infintelambda/diqu` from your forked repository
 
 ## Setting up an environment
 

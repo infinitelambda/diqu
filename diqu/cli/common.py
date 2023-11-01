@@ -52,6 +52,16 @@ def common_options(func):
         type=click.STRING,
     )
     @click.option(
+        "--profile-name",
+        help=(
+            "Specify dbt profile name in dbt_projects.yml file "
+            "which will ignore the `--project-dir` value and corresponding parsing stuff"
+        ),
+        default=None,
+        show_default=True,
+        type=click.STRING,
+    )
+    @click.option(
         "--profiles-dir",
         help="Specify dbt profiles.yml's dir.",
         default=Path.home() / ".dbt",

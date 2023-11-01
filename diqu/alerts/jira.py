@@ -57,7 +57,7 @@ class JiraBoard:
             "ORDER BY created DESC"
         ).substitute(
             project=self.project_id,
-            filter=os.environ.get("JIRA_OPEN_TICKETS_FILTER") or "*dq_tools",
+            filter=os.environ.get("JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY") or "dbt",
         )
 
         try:

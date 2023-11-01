@@ -23,7 +23,7 @@ class JiraBoard:
         """Initialization"""
         self.project_id = os.environ.get("JIRA_PROJECT_ID")
         self.incident_type = (
-            os.environ.get("JIRA_INCIDENT_TICKET_TYPE") or "[System] Incident"
+            os.environ.get("JIRA_ISSUE_TYPE") or "Bug"
         )
         self.conn = self.get_connection()
 
@@ -69,13 +69,13 @@ class JiraBoard:
             self.__create_tickets(
                 data=joined.loc[
                     (joined["JIRA_ISSUE_KEY"].isnull())
-                    & (joined["STATUS"] != "pass")
-                    & (joined["STATUS"] != "deprecated")
+                    & (joined["TEST_STATUS"] != "pass")
+                    & (joined["TEST_STATUS"] != "deprecated")
                 ]
             )
             self.__update_tickets(
                 data=joined.loc[
-                    joined["JIRA_ISSUE_KEY"].notnull() & joined["STATUS"].notnull()
+                    joined["JIRA_ISSUE_KEY"].notnull() & joined["TEST_STATUS"].notnull()
                 ]
             )
         except Exception as e:
@@ -168,7 +168,6 @@ class JiraBoard:
         if data.empty:
             logger.info("No new incident(s) detected!")
             return None
-
         return self.conn.create_issues(field_list=self.__build_field_list(data=data))
 
     def __update_tickets(self, data: DataFrame) -> Any:

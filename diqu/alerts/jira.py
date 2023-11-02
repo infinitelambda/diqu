@@ -1,5 +1,6 @@
 import os
 import string
+from datetime import datetime
 from typing import Any, List
 
 from jira import JIRA
@@ -22,9 +23,7 @@ class JiraBoard:
     def __init__(self) -> None:
         """Initialization"""
         self.project_id = os.environ.get("JIRA_PROJECT_ID")
-        self.incident_type = (
-            os.environ.get("JIRA_ISSUE_TYPE") or "Bug"
-        )
+        self.incident_type = os.environ.get("JIRA_ISSUE_TYPE") or "Bug"
         self.conn = self.get_connection()
 
     def get_connection(self) -> JIRA:
@@ -106,7 +105,7 @@ class JiraBoard:
             "- *Previous # of scanned records*: $prev_scanned_counts\n\n"
             "- *tag | DQ Issue Type*: $dq_issue_type\n"
             "- *tag | KPI Category*: $kpi_category\n\n"
-            "h2. Jira automation process | modified at {datetime.utcnow()} (UTC)"
+            "h2. Jira automation process | modified at $current_datetime (UTC)"
         )
         return [
             dict(
@@ -121,6 +120,7 @@ class JiraBoard:
                     prev_scanned_counts=row["PREV_NO_OF_RECORDS_SCANNED"],
                     dq_issue_type=row["DQ_ISSUE_TYPE"],
                     kpi_category=row["KPI_CATEGORY"],
+                    current_datetime=datetime.utcnow(),
                 ),
                 summary=row["JIRA_TICKET_SUMMARY"],
                 issuetype=dict(name=self.incident_type),

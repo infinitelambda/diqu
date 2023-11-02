@@ -1,11 +1,11 @@
-/* Get the the test result of the last 14 days */
+/* Get the the test result of the last x days */
 with
 
 source as (
     select * from @database.@schema.dq_issue_log
 ),
 
-test_results_last_14_days as (
+test_results_last_x_days as (  --  x = update_window_in_days
     select  *
             ,concat(
                 coalesce(nullif(split(table_name,'.')[2],''),'-'),'|',
@@ -31,8 +31,8 @@ test_results_last_14_days as (
         and table_name not ilike '%bi_column_analysis%'
         and table_name not ilike '%bi_dq_metrics%'
         and table_name not ilike '%test_coverage%'
-        --time limited to the last 14 days
-        and check_timestamp > dateadd(day, -14, sysdate())
+        --time limited to the last X days
+        and check_timestamp > dateadd(day, -$update_window_in_days, sysdate())
 ),
 
 latest_status as (
@@ -46,7 +46,7 @@ latest_status as (
             ,dq_issue_type
             ,kpi_category
 
-    from    test_results_last_14_days
+    from    test_results_last_x_days
 
     qualify row_number() over (partition by test_id order by check_timestamp desc) = 1
 
@@ -60,7 +60,7 @@ prev_statuses as (
             ,array_agg(no_of_records_scanned) within group (order by check_timestamp desc) as prev_no_of_records_scanned
             ,array_agg(no_of_records_failed) within group (order by check_timestamp desc) as prev_no_of_records_failed
 
-    from    test_results_last_14_days
+    from    test_results_last_x_days
 
     group by test_id
 
@@ -73,7 +73,7 @@ select      concat(
             ) as jira_ticket_summary
             ,latest_status.test_id
             ,case
-                when datediff(day, latest_status.check_timestamp, sysdate()) >=3 then 'deprecated'
+                when datediff(day, latest_status.check_timestamp, sysdate()) >=$deprecated_window_in_days then 'deprecated'
                 else latest_status.test_status
             end as test_status
             ,latest_status.test_status_emoji

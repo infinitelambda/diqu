@@ -167,6 +167,7 @@ class JiraBoard:
         if data.empty:
             logger.info("No new incident(s) detected!")
             return None
+        logger.info(f"Creating {len(data)} ticket(s) ...")
         return self.conn.create_issues(field_list=self.__build_field_list(data=data))
 
     def __update_tickets(self, data: DataFrame) -> Any:
@@ -181,7 +182,7 @@ class JiraBoard:
         if data.empty:
             logger.info("No open incident(s) need updating!")
             return None
-
+        logger.info(f"Updating {len(data)} ticket(s) ...")
         results = []
         for _, row in data.iterrows():
             logger.info(f"Updating {row['JIRA_ISSUE_KEY']}...")

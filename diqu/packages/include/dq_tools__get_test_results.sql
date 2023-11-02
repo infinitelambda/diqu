@@ -69,7 +69,7 @@ prev_statuses as (
 select      concat(
                 latest_status.test_status_emoji, ': ',
                 latest_status.test_id,
-                ' [dq-tools]'
+                ' [$filter]'
             ) as jira_ticket_summary
             ,latest_status.test_id
             ,case

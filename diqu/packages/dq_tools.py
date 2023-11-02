@@ -1,3 +1,6 @@
+import os
+import string
+
 from diqu.packages.query import Query
 
 
@@ -26,4 +29,8 @@ class DqTools:
         Returns:
             str: SQL query string
         """
-        return self.query.take(self.query.file or "dq_tools__get_test_results.sql")
+        return string.Template(
+            self.query.take(self.query.file or "dq_tools__get_test_results.sql")
+        ).substitute(
+            filter=os.environ.get("JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY") or "dq-tools",
+        )

@@ -3,7 +3,6 @@ from typing import List
 import click
 
 from diqu.cli.main import diqu
-from diqu.utils.meta import ResultCode
 
 
 class diquRunner:

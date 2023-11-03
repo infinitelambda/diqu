@@ -52,4 +52,3 @@ class BaseConnection(metaclass=SingletonABCMeta):
         Args:
             query (str): SQL query
         """
-        pass

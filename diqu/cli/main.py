@@ -24,4 +24,4 @@ def diqu(ctx, **kwargs):
 @common.common_logging
 def alert(ctx, **kwargs):
     """Alert the incidents"""
-    AlertTask(**kwargs).run()
+    exit(AlertTask(**kwargs).run())

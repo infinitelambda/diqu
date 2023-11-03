@@ -5,15 +5,15 @@ from diqu.alerts.factory import AlertFactory
 
 class TestAlertFactory:
     def test_is_empty_true(self):
-        assert True == AlertFactory().is_empty()
-        assert True == AlertFactory(to=[]).is_empty()
+        assert AlertFactory().is_empty()
+        assert AlertFactory(to=[]).is_empty()
 
     def test_is_empty_true_with_warning(self, caplog):
-        assert True == AlertFactory(to=["not_exists_channel"]).is_empty()
+        assert AlertFactory(to=["not_exists_channel"]).is_empty()
         assert "Module not_exists_channel could not be found" in caplog.text
 
     def test_is_empty_false(self):
-        assert False == AlertFactory(to=["jira"]).is_empty()
+        assert not AlertFactory(to=["jira"]).is_empty()
 
     @mock.patch("diqu.alerts.jira.alert")
     def test_run(self, mock_alert, caplog):

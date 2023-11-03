@@ -7,7 +7,7 @@ class AlertFactory:
 
     def __init__(self, **kwargs) -> None:
         """Initialization: Load the alert modules"""
-        tos = kwargs.get("to")
+        tos = kwargs.get("to") or []
         self.channels = []
         for to in tos:
             try:

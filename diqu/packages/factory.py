@@ -2,7 +2,7 @@ from diqu.utils.module import load_module
 
 
 class PackageFactory:
-    """Package factory class"""
+    """Package Factory class"""
 
     def __init__(self, **kwargs) -> None:
         """Initilization:
@@ -14,10 +14,10 @@ class PackageFactory:
         )
         self.config = kwargs
 
-    def get_query(self):
+    def get_query(self) -> str:
         """Return the SQL query of the configured package
 
         Returns:
-            _type_: _description_
+            str: SQL query or csv file name
         """
         return self.package.get_query(config=self.config)

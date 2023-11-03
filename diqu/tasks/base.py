@@ -16,4 +16,3 @@ class BaseTask(ABC):
         Returns:
             ResultCode: Result code
         """
-        pass

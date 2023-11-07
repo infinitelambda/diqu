@@ -63,22 +63,18 @@ In particular to the alert module, here are the additional configurations:
   diqu alert --to slack
   ```
 
-- For JIRA:
-JIRA credential should be configured via environment variables:
+- For JIRA, you need to use the environment variables to configure the JIRA Board:
 
   ```bash
   export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
   export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
   export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
   export JIRA_PROJECT_ID=your_project_id e.g. 106413
+  export JIRA_ISSUE_TYPE=your_ticket_type, default to "Bug"
+  export JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY=your_ticket_filter_on_title, default to "dq-tools"
+  export JIRA_TICKET_DEPRECATED_WINDOW_IN_DAYS=your_ticket_deprecation_time_in_day, default to "3"
+  export JIRA_TICKET_UPDATE_WINDOW_IN_DAYS=your_ticket_historical_data_update_window_in_days, default to "14"
   diqu alert --to jira
-  ```
-Other JIRA variables should be configured in `jira_variable_config.py`
-  ```python
-  JIRA_ISSUE_TYPE = "Bug"
-  JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY = "dq-tools"
-  JIRA_TICKET_DEPRECATED_WINDOW_IN_DAYS = 3
-  JIRA_TICKET_UPDATE_WINDOW_IN_DAYS = 14
   ```
 
 ## How to Contribute

@@ -10,7 +10,7 @@ edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2023 Infinite Lambda
 
 nav:
-  - diqu:
+  - diqu - Quick Start:
     - index.md
     - User Guide:
       - Alerting Configuration:
@@ -22,10 +22,9 @@ nav:
       - Packages Configuration:
         - DQ Tools: nav/guide/config/packages/dq-tools.md
         - Custom query: nav/guide/config/packages/custom.md
-      - CLI Reference: nav/guide/cli.md
-    - Development:
-      - Contribution Guideline: nav/dev/contributing.md
-      - Change Log: nav/dev/changelog.md
+    - CLI Reference: nav/guide/cli.md
+    - Contribution Guideline: nav/dev/contributing.md
+    - Change Log ↗️: https://github.com/infinitelambda/diqu/releases" target="_blank
 
 theme:
   name: material

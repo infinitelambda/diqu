@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "diqu"
 version = "0.0.0"
-description = "CLI companion tool to support dq-tools package"
+description = "CLI companion tool to support dq-tools package and more"
 authors = ["IL <dat@infinitelambda.com>"]
 readme = "README.md"
-repository = "https://github.com/infinitelambda/dq-tools-cli"
+repository = "https://github.com/infinitelambda/diqu"
 keywords = ["flake8", "markdown", "lint"]
 classifiers = [
     "Environment :: Console",
@@ -40,8 +40,11 @@ autoflake = "^2.0.1"
 pytest = "^7.2.0"
 pytest-sugar = "^0.9.6"
 coverage = {version = "^6.5.0", extras = ["toml"]}
-tox = "^4.10.0"
 pdoc = "^14.1.0"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.8"
+mkdocs-minify-plugin = "^0.7.1"
+mike = "^2.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -84,4 +87,8 @@ test-cov = [
   {cmd = "coverage run -m pytest ."},
   {cmd = "coverage report --show-missing"},
   {cmd = "coverage xml"},
+]
+build-doc = [
+  {cmd = "mkdocs build"},
+  {cmd = "mkdocs serve"}
 ]

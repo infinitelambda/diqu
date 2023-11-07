@@ -36,7 +36,7 @@ class TestRunner:
     def test_invoke_help(self, diqu: diquRunner) -> None:
         diqu.invoke(["-h"])
         diqu.invoke(["--help"])
-    
+
     def test_invoke_alert_invalid(self, diqu: diquRunner) -> None:
         with pytest.raises(SystemExit):
             diqu.invoke(["alert", "--to", "invalid"])

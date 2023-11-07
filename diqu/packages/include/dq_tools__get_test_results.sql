@@ -68,6 +68,9 @@ prev_statuses as (
 
 select      concat(
                 latest_status.test_status_emoji, ': ',
+                latest_status.test_id
+            ) as slack_issue_summary
+            ,concat(
                 latest_status.test_id,
                 ' [$filter]'
             ) as jira_ticket_summary
@@ -76,7 +79,10 @@ select      concat(
                 when datediff(day, latest_status.check_timestamp, sysdate()) >=$deprecated_window_in_days then 'deprecated'
                 else latest_status.test_status
             end as test_status
-            ,latest_status.test_status_emoji
+            ,case
+                when datediff(day, latest_status.check_timestamp, sysdate()) >=$deprecated_window_in_days then '⚫'
+                else latest_status.test_status_emoji
+            end as test_status_emoji
             ,latest_status.check_timestamp
             ,latest_status.no_of_records_scanned
             ,latest_status.no_of_records_failed

@@ -6,6 +6,10 @@ from typing import Any, List
 from jira import JIRA
 from pandas import DataFrame
 
+from diqu.utils.jira_variable_config import (
+    JIRA_ISSUE_TYPE,
+    JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY,
+)
 from diqu.utils.log import logger
 from diqu.utils.meta import ResultCode
 
@@ -23,7 +27,7 @@ class JiraBoard:
     def __init__(self) -> None:
         """Initialization"""
         self.project_id = os.environ.get("JIRA_PROJECT_ID")
-        self.incident_type = os.environ.get("JIRA_ISSUE_TYPE") or "Bug"
+        self.incident_type = JIRA_ISSUE_TYPE if JIRA_ISSUE_TYPE is not None else "Bug"
         self.conn = self.get_connection()
 
     def get_connection(self) -> JIRA:
@@ -49,6 +53,11 @@ class JiraBoard:
         Returns:
             ResultCode: Result code
         """
+        ticket_keyword = (
+            JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY
+            if JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY is not None
+            else "dq-tools"
+        )
         open_tickets_filter = string.Template(
             'project = "$project" '
             'AND statusCategory != "Done" '
@@ -56,7 +65,7 @@ class JiraBoard:
             "ORDER BY created DESC"
         ).substitute(
             project=self.project_id,
-            filter=os.environ.get("JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY") or "dq-tools",
+            filter=ticket_keyword,
         )
 
         try:

@@ -2,7 +2,7 @@
 with
 
 source as (
-    select * from @database.@schema.dq_issue_log
+    select * from @database.$schema.dq_issue_log
 ),
 
 test_results_last_x_days as (  --  x = update_window_in_days

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "diqu"
-version = "0.0.3"
+version = "0.0.0"
 description = "CLI companion tool to support dq-tools package"
 authors = ["IL <dat@infinitelambda.com>"]
 readme = "README.md"

@@ -27,9 +27,7 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
 ```bash
 dbt run -s dq_tools # optional
-diqu alert \
-  --project-dir /path/to/dbt/project \
-  --to slack --to jira
+diqu alert --to jira
 ```
 
 <details> <!-- markdownlint-disable no-inline-html -->
@@ -41,8 +39,6 @@ diqu alert \
   04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
   04:33:19  diqu: INFO - Using snowflake connection
   04:33:19  diqu: INFO - Looking for the query in: /path/to/file.sql
-  04:33:23  diqu: INFO - Alerting to channel: SLACK
-  04:33:23  diqu: INFO - ✅ Done > Slack
   04:33:23  diqu: INFO - Alerting to channel: JIRA
   04:33:23  diqu: INFO - ✅ Done > JIRA
   ```

@@ -54,7 +54,7 @@ def alert(data, limit: int = 3) -> ResultCode:
     for i in range(len(incident_data)):
         incidents += template_incident.substitute(
             index=i + 1,
-            incident=incident_data.iloc[0, 0],  # JIRA_TICKET_SUMMARY
+            incident=incident_data.iloc[0, 0],  # first column: SLACK_ISSUE_SUMMARY
         )
 
     r = Slack().post_message(

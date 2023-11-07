@@ -127,7 +127,7 @@ class JiraBoard:
                 project=dict(id=self.project_id),
                 labels=[
                     "AutomaticAlert",
-                    "DIQU",
+                    "diqu",
                     f"{str(row['DQ_ISSUE_TYPE']).replace(' ','_').replace('-','_')}",
                     f"{str(row['KPI_CATEGORY']).replace(' ','_').replace('-','_')}",
                 ],

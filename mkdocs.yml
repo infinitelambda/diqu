@@ -11,7 +11,7 @@ copyright: Copyright &copy; 2023 Infinite Lambda
 
 nav:
   - diqu - Quick Start:
-    - index.md
+    - Quick Start: index.md
     - User Guide:
       - Alerting Configuration:
         - Slack: nav/guide/config/alerts/slack.md

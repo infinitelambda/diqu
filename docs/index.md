@@ -10,7 +10,7 @@ CLI companion tool supporting the Alert / Notification for [![dq-tools](https://
 
 ## Concept
 
-!!! quote "Alert Romance 🔴🟡⚫✅"
+!!! quote "Alert Romance 🔴 🟡 ⚫ ✅"
     _In the realm where circuits hum and wires entwine,_
 
     _A bug’s life, oh, how it’s truly divine._
@@ -23,7 +23,7 @@ CLI companion tool supporting the Alert / Notification for [![dq-tools](https://
 
 In the efforts of making our bug's life easier, `diqu` CLI is born with a significant impact, streamlining collaboration and enhancing agility in our daily tasks. This tool takes charge of handling the beloved "chick" of our engineering world: **Anomalies** or **Incidents** 🐞
 
-Alongside our methods for detecting these anomalies in our data, it's important to ensure the Auto Alert trigger is firmly in place, ready to notify us promptly. Together, these innovations pave the way for a more efficient and seamless bug-fighting experience.
+Alongside our methods for detecting these anomalies in our data, it's important to ensure the Auto Alert trigger is firmly in place, ready to notify us promptly. Together, these innovations pave the way for a more efficient and seamless bug-fighting experience 🚀
 
 ## Installation
 
@@ -34,7 +34,7 @@ Alongside our methods for detecting these anomalies in our data, it's important 
     <a href="#" data-terminal-control="">restart ↻</a>
 </div>
 
-📓 NOTE: The DWH module should get installed already if you use `diqu` in a dbt project, if not, please perform additional step, for example, to install snowflake module:
+📓 _NOTE_: The DWH module should get installed already if you use `diqu` in a dbt project, if not, please perform additional step, for example, to install snowflake module:
 
 ```bash
 pip install "snowflake-connector-python[pandas]"

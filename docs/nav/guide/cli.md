@@ -1,3 +1,4 @@
+<!-- markdownlint-disable code-block-style -->
 # CLI Reference (diqu)
 
 Run `diqu --help` or `diqu -h` to see the basic guideline for CLI Reference
@@ -75,36 +76,36 @@ For example, you'd have a query built in `myquery.sql` file which is located at 
 
 For example, the `dbt_project.yml` is as below:
 
-    ```yaml
-    name: 'my_awesome_dbt'
-    version: '1.0.0'
-    config-version: 2
+```yaml  
+name: 'my_awesome_dbt'
+version: '1.0.0'
+config-version: 2
 
-    profile: 'my_awesome_dbt_profile' # this is the profile name
-    ...
-    ```
+profile: 'my_awesome_dbt_profile' # this is the profile name
+...
+```
 
 And, the `profiles.yml` content is:
 
-    ```yaml
-    my_awesome_dbt_profile:
-      target: snowflake
-      outputs:
-        snowflake:
-          type: snowflake
-          account: "{{ env_var('DBT_SNOWFLAKE_TEST_ACCOUNT') }}"
-          user: "{{ env_var('DBT_SNOWFLAKE_TEST_USER') }}"
-          password: "{{ env_var('DBT_ENV_SECRET_SNOWFLAKE_TEST_PASSWORD') }}"
-          role: "{{ env_var('DBT_SNOWFLAKE_TEST_ROLE') }}"
-          database: "{{ env_var('DBT_SNOWFLAKE_TEST_DATABASE') }}"
-          warehouse: "{{ env_var('DBT_SNOWFLAKE_TEST_WAREHOUSE') }}"
-          schema: "{{ env_var('DBT_SCHEMA') }}"
-          threads: 10
+```yaml
+my_awesome_dbt_profile:
+    target: snowflake
+    outputs:
+    snowflake:
+        type: snowflake
+        account: "{{ env_var('DBT_SNOWFLAKE_TEST_ACCOUNT') }}"
+        user: "{{ env_var('DBT_SNOWFLAKE_TEST_USER') }}"
+        password: "{{ env_var('DBT_ENV_SECRET_SNOWFLAKE_TEST_PASSWORD') }}"
+        role: "{{ env_var('DBT_SNOWFLAKE_TEST_ROLE') }}"
+        database: "{{ env_var('DBT_SNOWFLAKE_TEST_DATABASE') }}"
+        warehouse: "{{ env_var('DBT_SNOWFLAKE_TEST_WAREHOUSE') }}"
+        schema: "{{ env_var('DBT_SCHEMA') }}"
+        threads: 10
 
-    my_other_dbt_profile:
-      target: snowflake
-      ...
-    ```
+my_other_dbt_profile:
+    target: snowflake
+    ...
+```
 
 Finally, the command is: `diqu alert --profile-name my_awesome_dbt_profile` which can be run anywhere (inside or outside of the dbt project dir).
 

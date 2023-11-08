@@ -8,7 +8,7 @@
 diqu alert --query-dir /opt/alert/mydbt --query-file myquery.sql
 ```
 </code></pre></div> <h3 id=use-a-specific-dbt-profile-instead-of-pointing-to-the-dbt-project>Use a specific dbt profile instead of pointing to the dbt project<a class=headerlink href=#use-a-specific-dbt-profile-instead-of-pointing-to-the-dbt-project title="Permanent link">&para;</a></h3> <div class="tabbed-set tabbed-alternate" data-tabs=4:1><input checked=checked id=__tabbed_4_1 name=__tabbed_4 type=radio><div class=tabbed-labels><label for=__tabbed_4_1>Use <code>--profile-name</code> option</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-bash highlight"><pre><span></span><code><span id=__span-5-1><a id=__codelineno-5-1 name=__codelineno-5-1 href=#__codelineno-5-1></a>diqu<span class=w> </span>alert<span class=w> </span>--profile-name<span class=w> </span>&lt;my_profile&gt;
-</span></code></pre></div> </div> </div> </div> <p>For example, the <code>dbt_project.yml</code> is as below:</p> <div class="language-text highlight"><pre><span></span><code>```yml
+</span></code></pre></div> </div> </div> </div> <p>For example, the <code>dbt_project.yml</code> is as below:</p> <div class="language-text highlight"><pre><span></span><code>```yaml
 name: &#39;my_awesome_dbt&#39;
 version: &#39;1.0.0&#39;
 config-version: 2
@@ -16,7 +16,7 @@ config-version: 2
 profile: &#39;my_awesome_dbt_profile&#39; # this is the profile name
 ...
 ```
-</code></pre></div> <p>And, the <code>profiles.yml</code> content is:</p> <div class="language-text highlight"><pre><span></span><code>```yml
+</code></pre></div> <p>And, the <code>profiles.yml</code> content is:</p> <div class="language-text highlight"><pre><span></span><code>```yaml
 my_awesome_dbt_profile:
   target: snowflake
   outputs:

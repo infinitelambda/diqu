@@ -8,6 +8,23 @@
 
 CLI companion tool supporting the Alert / Notification for [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) and more.
 
+## Concept
+
+!!! quote "Auto Alert Romance"
+    _In the realm where circuits hum and wires entwine,_
+
+    _A bug’s life, oh, how it’s truly divine._
+
+    _In the world of engineering, where chaos thrives,_
+
+    _Auto Alert, our savior, arrives._
+
+<img src="assets/img/diqu_concept.jpeg" alt="diqu Concept" width="600"> <!-- markdownlint-disable no-inline-html -->
+
+In the efforts of making our bug's life easier, `diqu` CLI is born with a significant impact, streamlining collaboration and enhancing agility in our daily tasks. This tool takes charge of handling the beloved "chick" of our engineering world: **Anomalies** or **Incidents**.
+
+Alongside our methods for detecting these anomalies in our data, it's important to ensure the Auto Alert trigger is firmly in place, ready to notify us promptly. Together, these innovations pave the way for a more efficient and seamless bug-fighting experience.
+
 ## Installation
 
 <div class="termynal" data-termynal data-ty-typeDelay="40" data-ty-lineDelay="700"> <!-- markdownlint-disable no-inline-html -->

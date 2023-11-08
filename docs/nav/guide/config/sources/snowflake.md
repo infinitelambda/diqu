@@ -11,7 +11,7 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
 ## User / Password authentication
 
-```yml
+```yaml
 # ~/.dbt/profiles.yml
 my-snowflake-db:
   target: dev
@@ -32,7 +32,7 @@ my-snowflake-db:
 
 ## SSO Authentication
 
-```yml
+```yaml
 # ~/.dbt/profiles.yml
 my-snowflake-db:
   target: dev

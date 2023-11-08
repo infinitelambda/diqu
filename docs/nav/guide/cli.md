@@ -75,7 +75,7 @@ For example, you'd have a query built in `myquery.sql` file which is located at 
 
 For example, the `dbt_project.yml` is as below:
 
-    ```yml
+    ```yaml
     name: 'my_awesome_dbt'
     version: '1.0.0'
     config-version: 2
@@ -86,7 +86,7 @@ For example, the `dbt_project.yml` is as below:
 
 And, the `profiles.yml` content is:
 
-    ```yml
+    ```yaml
     my_awesome_dbt_profile:
       target: snowflake
       outputs:

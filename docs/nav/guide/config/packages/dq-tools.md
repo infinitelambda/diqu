@@ -8,7 +8,7 @@ dbt version required: >=1.6.0
 
 Include the following in your packages.yml file:
 
-```yml
+```yaml
 packages:
   - package: infinitelambda/dq_tools
     version: 1.4.2
@@ -27,7 +27,7 @@ And the hook is to save the test result if any.
 
 In `dbt_project.yml` file:
 
-```yml
+```yaml
 vars:
   dbt_dq_tool_schema: AUDIT
 

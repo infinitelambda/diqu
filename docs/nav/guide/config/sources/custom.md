@@ -8,7 +8,7 @@ In the meantime, using CSV file is a good option alternatively.
 
 Let's create a new target for CSV in dbt `profiles.yml` file:
 
-```yml
+```yaml
 ci:
   target: dev
   outputs:

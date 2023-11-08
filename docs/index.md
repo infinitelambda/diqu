@@ -1,3 +1,4 @@
+<!-- markdownlint-disable code-block-style -->
 # diqu
 
 [![PyPI version](https://badge.fury.io/py/diqu.svg)](https://pypi.org/project/diqu/)
@@ -7,6 +8,22 @@
 [![codecov](https://codecov.io/gh/infinitelambda/diqu/graph/badge.svg?token=JUO2ASNQEB)](https://codecov.io/gh/infinitelambda/diqu)
 
 CLI companion tool supporting the Alert / Notification for [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) and more.
+
+## Installation
+
+<div class="termynal" data-termynal data-ty-typeDelay="40" data-ty-lineDelay="700"> <!-- markdownlint-disable no-inline-html -->
+    <span data-ty="input">pip install diqu --upgrade</span>
+    <span data-ty="progress"></span>
+    <span data-ty>Successfully installed diqu</span>
+    <a href="#" data-terminal-control="">restart ↻</a>
+</div>
+
+📓 _NOTE_: The DWH module should get installed already if you use `diqu` in a dbt project, if not, please perform additional step, for example, to install snowflake module:
+
+```bash
+pip install "snowflake-connector-python[pandas]"
+pip install "snowflake-connector-python[secure-local-storage]"
+```
 
 ## Concept
 
@@ -24,22 +41,6 @@ CLI companion tool supporting the Alert / Notification for [![dq-tools](https://
 In the efforts of making our bug's life easier, `diqu` CLI is born with a significant impact, streamlining collaboration and enhancing agility in our daily tasks. This tool takes charge of handling the beloved "chick" of our engineering world: **Anomalies** or **Incidents** 🐞
 
 Alongside our methods for detecting these anomalies in our data, it's important to ensure the Auto Alert trigger is firmly in place, ready to notify us promptly. Together, these innovations pave the way for a more efficient and seamless bug-fighting experience 🚀
-
-## Installation
-
-<div class="termynal" data-termynal data-ty-typeDelay="40" data-ty-lineDelay="700"> <!-- markdownlint-disable no-inline-html -->
-    <span data-ty="input">pip install diqu --upgrade</span>
-    <span data-ty="progress"></span>
-    <span data-ty>Successfully installed diqu</span>
-    <a href="#" data-terminal-control="">restart ↻</a>
-</div>
-
-📓 _NOTE_: The DWH module should get installed already if you use `diqu` in a dbt project, if not, please perform additional step, for example, to install snowflake module:
-
-```bash
-pip install "snowflake-connector-python[pandas]"
-pip install "snowflake-connector-python[secure-local-storage]"
-```
 
 ## Usage
 

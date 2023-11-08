@@ -14,7 +14,7 @@ version: &#39;1.0.0&#39;
 config-version: 2
 
 profile: &#39;my_awesome_dbt_profile&#39; # this is the profile name
-...
+#...
 ```
 </code></pre></div> <p>And, the <code>profiles.yml</code> content is:</p> <div class="language-text highlight"><pre><span></span><code>```yaml
 my_awesome_dbt_profile:
@@ -33,7 +33,7 @@ my_awesome_dbt_profile:
 
 my_other_dbt_profile:
   target: snowflake
-  ...
+  #...
 ```
 </code></pre></div> <p>Finally, the command is: <code>diqu alert --profile-name my_awesome_dbt_profile</code> which can be run anywhere (inside or outside of the dbt project dir).</p> <h3 id=configure-the-sql-context-in-case-that-your-tableview-is-on-a-different-schema-or-database-configured-in-the-dbt-profile>Configure the SQL context in case that your table/view is on a different schema or database configured in the dbt profile<a class=headerlink href=#configure-the-sql-context-in-case-that-your-tableview-is-on-a-different-schema-or-database-configured-in-the-dbt-profile title="Permanent link">&para;</a></h3> <div class="tabbed-set tabbed-alternate" data-tabs=5:1><input checked=checked id=__tabbed_5_1 name=__tabbed_5 type=radio><div class=tabbed-labels><label for=__tabbed_5_1>Use <code>--query-database</code> and <code>--query-schema</code> option</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class="language-bash highlight"><pre><span></span><code><span id=__span-8-1><a id=__codelineno-8-1 name=__codelineno-8-1 href=#__codelineno-8-1></a>diqu<span class=w> </span>alert<span class=w> </span>--query-database<span class=w> </span>&lt;db&gt;<span class=w> </span>--query-schema<span class=w> </span>&lt;schema&gt;
 </span></code></pre></div> </div> </div> </div> <p>Additionally, in the query file <a href=https://github.com/infinitelambda/diqu/blob/main/diqu/packages/include/dq_tools__get_test_results.sql>dq_tools__get_test_results.sql</a>, you need to have a configuration to specify the main table/view which is: <div class="language-sql highlight"><pre><span></span><code><span id=__span-9-1><a id=__codelineno-9-1 name=__codelineno-9-1 href=#__codelineno-9-1></a><span class=k>with</span>

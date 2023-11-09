@@ -13,6 +13,7 @@ nav:
   - diqu - Quick Start:
     - Quick Start: index.md
     - User Guide:
+      - General: nav/guide/common.md
       - Alerting Configuration:
         - Slack: nav/guide/config/alerts/slack.md
         - JIRA: nav/guide/config/alerts/jira.md

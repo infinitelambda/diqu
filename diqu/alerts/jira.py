@@ -61,10 +61,7 @@ class JiraBoard:
 
         try:
             open_ticket_data = self.__get_tickets(jql_filter=open_tickets_filter)
-            joined = open_ticket_data.merge(
-                right=data, on="JIRA_TICKET_SUMMARY", how="outer"
-            )
-
+            joined = open_ticket_data.merge(right=data, on="TICKET_TITLE", how="outer")
             self.__create_tickets(
                 data=joined.loc[
                     (joined["JIRA_ISSUE_KEY"].isnull())
@@ -94,7 +91,7 @@ class JiraBoard:
         """
         data = data.fillna(0)
         description_template = string.Template(
-            "h2. Test: [ $test_id ] has failed with the following information:\n\n"
+            "h2. Test metadata:\n\n"
             "- *Test ID*: $test_id\n"
             "- *Latest Status*: $test_status\n\n"
             "- *Latest Run Timestamp*: $check_timestamp (UTC)\n"
@@ -122,7 +119,7 @@ class JiraBoard:
                     kpi_category=row["KPI_CATEGORY"],
                     current_datetime=datetime.utcnow(),
                 ),
-                summary=row["JIRA_TICKET_SUMMARY"],
+                summary=row["TICKET_TITLE"],
                 issuetype=dict(name=self.incident_type),
                 project=dict(id=self.project_id),
                 labels=[
@@ -149,9 +146,7 @@ class JiraBoard:
         return DataFrame(
             {
                 "JIRA_ISSUE_KEY": [str(x.key) for x in search_issues],
-                "JIRA_TICKET_SUMMARY": [
-                    str(x.fields.summary).strip() for x in search_issues
-                ],
+                "TICKET_TITLE": [str(x.fields.summary).strip() for x in search_issues],
             }
         )
 

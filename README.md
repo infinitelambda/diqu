@@ -70,10 +70,10 @@ In particular to the alert module, here are the additional configurations:
   export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
   export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
   export JIRA_PROJECT_ID=your_project_id e.g. 106413
-  export JIRA_ISSUE_TYPE=your_ticket_type, default to "Bug"
-  export JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY=your_ticket_filter_on_title, default to "dq-tools"
-  export JIRA_TICKET_DEPRECATED_WINDOW_IN_DAYS=your_ticket_deprecation_time_in_day, default to "3"
-  export JIRA_TICKET_UPDATE_WINDOW_IN_DAYS=your_ticket_historical_data_update_window_in_days, default to "14"
+  export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
+  export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
+  export JIRA_ISSUE_DEPRECATED_WINDOW_IN_DAYS=your_issue_deprecation_time_in_day, default to "3"
+  export JIRA_ISSUE_UPDATE_WINDOW_IN_DAYS=your_issue_historical_data_update_window_in_days, default to "14"
   diqu alert --to jira
   ```
 

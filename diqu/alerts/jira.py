@@ -41,7 +41,7 @@ class JiraBoard:
         )
 
     def raise_incidents(self, data: DataFrame) -> ResultCode:
-        """Create | Update the Incident tickets
+        """Create | Update the Incident issues
 
         Args:
             data (DataFrame): Input incident data
@@ -49,7 +49,7 @@ class JiraBoard:
         Returns:
             ResultCode: Result code
         """
-        open_tickets_filter = string.Template(
+        open_issues_filter = string.Template(
             'project = "$project" '
             'AND statusCategory != "Done" '
             'AND summary ~ "$filter" '
@@ -60,16 +60,16 @@ class JiraBoard:
         )
 
         try:
-            open_ticket_data = self.__get_tickets(jql_filter=open_tickets_filter)
-            joined = open_ticket_data.merge(right=data, on="TICKET_TITLE", how="outer")
-            self.__create_tickets(
+            open_issue_data = self.__get_issues(jql_filter=open_issues_filter)
+            joined = open_issue_data.merge(right=data, on="TEST_TITLE", how="outer")
+            self.__create_issues(
                 data=joined.loc[
                     (joined["JIRA_ISSUE_KEY"].isnull())
                     & (joined["TEST_STATUS"] != "pass")
                     & (joined["TEST_STATUS"] != "deprecated")
                 ]
             )
-            self.__update_tickets(
+            self.__update_issues(
                 data=joined.loc[
                     joined["JIRA_ISSUE_KEY"].notnull() & joined["TEST_STATUS"].notnull()
                 ]
@@ -81,13 +81,13 @@ class JiraBoard:
         return ResultCode.SUCCEEDED
 
     def __build_field_list(self, data: DataFrame) -> List[dict]:
-        """Build JIRA ticket fields
+        """Build JIRA issue fields
 
         Args:
-            data (DataFrame): Input as a list of the tickets
+            data (DataFrame): Input as a list of the issues
 
         Returns:
-            List[dict]: List of ticket's fields
+            List[dict]: List of issue's fields
         """
         data = data.fillna(0)
         description_template = string.Template(
@@ -119,7 +119,7 @@ class JiraBoard:
                     kpi_category=row["KPI_CATEGORY"],
                     current_datetime=datetime.utcnow(),
                 ),
-                summary=row["TICKET_TITLE"],
+                summary=row["TEST_TITLE"],
                 issuetype=dict(name=self.incident_type),
                 project=dict(id=self.project_id),
                 labels=[
@@ -132,12 +132,12 @@ class JiraBoard:
             for _, row in data.iterrows()
         ]
 
-    def __get_tickets(self, jql_filter: str = None, limit: int = 100) -> DataFrame:
-        """Get open tickets in JIRA Board
+    def __get_issues(self, jql_filter: str = None, limit: int = 100) -> DataFrame:
+        """Get open issues in JIRA Board
 
         Args:
-            jql_filter (str, optional): JQL filter on ticket title. Defaults to None.
-            limit (int, optional): Specify no of tickets returned. Defaults to 100.
+            jql_filter (str, optional): JQL filter on issue summary. Defaults to None.
+            limit (int, optional): Specify the number of issues returned. Defaults to 100.
 
         Returns:
             DataFrame: Frame of Ticket No and Ticket Title
@@ -146,15 +146,15 @@ class JiraBoard:
         return DataFrame(
             {
                 "JIRA_ISSUE_KEY": [str(x.key) for x in search_issues],
-                "TICKET_TITLE": [str(x.fields.summary).strip() for x in search_issues],
+                "TEST_TITLE": [str(x.fields.summary).strip() for x in search_issues],
             }
         )
 
-    def __create_tickets(self, data: DataFrame) -> Any:
-        """Bulk creation of the input tickets' data
+    def __create_issues(self, data: DataFrame) -> Any:
+        """Bulk creation of the input issues' data
 
         Args:
-            data (DataFrame): Input tickets' data
+            data (DataFrame): Input issues' data
 
         Returns:
             Any: None or List of created issues
@@ -162,14 +162,14 @@ class JiraBoard:
         if data.empty:
             logger.info("No new incident(s) detected!")
             return None
-        logger.info(f"Creating {len(data)} ticket(s) ...")
+        logger.info(f"Creating {len(data)} issue(s) ...")
         return self.conn.create_issues(field_list=self.__build_field_list(data=data))
 
-    def __update_tickets(self, data: DataFrame) -> Any:
-        """Update the existing ticket in JIRA Board
+    def __update_issues(self, data: DataFrame) -> Any:
+        """Update the existing issue in JIRA Board
 
         Args:
-            data (DataFrame): Input tickets' data need updating
+            data (DataFrame): Input issues' data need updating
 
         Returns:
             Any:  None or List of updated issues
@@ -177,7 +177,7 @@ class JiraBoard:
         if data.empty:
             logger.info("No open incident(s) need updating!")
             return None
-        logger.info(f"Updating {len(data)} ticket(s) ...")
+        logger.info(f"Updating {len(data)} issue(s) ...")
         results = []
         for _, row in data.iterrows():
             logger.info(f"Updating {row['JIRA_ISSUE_KEY']}...")

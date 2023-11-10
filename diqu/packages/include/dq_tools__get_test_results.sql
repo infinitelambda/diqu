@@ -24,18 +24,18 @@ test_results_last_x_days as (  --  x = update_window_in_days
                 when test_status = 'warn' then '🟡'
                 else '🟢'
             end as test_status_emoji
-            ,split_part(test_unique_id, '.', -2) || '.' || split_part(test_unique_id, '.', -1) as ticket_title__test_id
+            ,split_part(test_unique_id, '.', -2) || '.' || split_part(test_unique_id, '.', -1) as test_title__test_id
             ,case
                 when test_status = 'failed' then 'Failure in test: '
                 when test_status = 'warn' then 'Warning in test: '
                 else 'Pass in test: '
-            end as ticket_title__desc_text
+            end as test_title__desc_text
             ,concat(
                 test_status_emoji, ' | ',
-                ticket_title__desc_text,
-                ticket_title__test_id,
+                test_title__desc_text,
+                test_title__test_id,
                 ' [$filter]'
-            ) as ticket_title
+            ) as test_title
 
     from    source
     where   true
@@ -50,7 +50,7 @@ test_results_last_x_days as (  --  x = update_window_in_days
 latest_status as (
 
     select  test_id
-            ,ticket_title
+            ,test_title
             ,test_status
             ,test_status_emoji
             ,check_timestamp
@@ -68,7 +68,7 @@ latest_status as (
 prev_statuses as (
 
     select  test_id
-            ,ticket_title
+            ,test_title
             ,array_agg(test_status_emoji) within group (order by check_timestamp desc) as prev_statuses
             ,array_agg(check_timestamp) within group (order by check_timestamp desc) as prev_check_timestamps
             ,array_agg(no_of_records_scanned) within group (order by check_timestamp desc) as prev_no_of_records_scanned
@@ -76,11 +76,11 @@ prev_statuses as (
 
     from    test_results_last_x_days
 
-    group by test_id, ticket_title
+    group by test_id, test_title
 
 )
 
-select      ticket_title
+select      test_title
             ,latest_status.test_id
             ,case
                 when datediff(day, latest_status.check_timestamp, sysdate()) >=$deprecated_window_in_days then 'deprecated'

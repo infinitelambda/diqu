@@ -29,8 +29,9 @@ class LogFormatter(logging.Formatter):
 logger = logging.getLogger("diqu")
 logger.setLevel(logging.DEBUG)
 logger.propagate = False
-    
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-ch.setFormatter(LogFormatter())
-logger.addHandler(ch)
+
+if len(logger.handlers) == 0:
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    ch.setFormatter(LogFormatter())
+    logger.addHandler(ch)

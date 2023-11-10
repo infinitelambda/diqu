@@ -97,3 +97,39 @@ class TestSourceFactory:
         mock_load.assert_called_once()
         mock_get_connection.assert_called_once()
         mock_execute.assert_called_once()
+
+    @pytest.mark.parametrize(
+        "kwargs",
+        [
+            (dict(profile_name="diqu", package="csv")),
+        ],
+    )
+    def test_get_connection_nok_with_csv_package(self, kwargs):
+        with mock.patch(
+            "diqu.utils.yml.load",
+            return_value=dict(
+                diqu=dict(outputs=dict(dev=dict(type="snowflake")), target="dev")
+            ),
+        ) as mock_load:
+            with mock.patch(
+                "diqu.sources.factory.load_module", return_value=snowflake
+            ) as mock_load_module:
+                with mock.patch(
+                    "diqu.sources.snowflake.get_connection", return_value="irrelevant"
+                ) as mock_get_connection:
+                    _ = SourceFactory(**kwargs).get_connection()
+        mock_load.assert_called_once()
+        assert 0 == mock_load_module.call_count
+        assert 0 == mock_get_connection.call_count
+
+    @mock.patch("diqu.utils.yml.load", return_value=dict(data="irrelevant"))
+    @mock.patch.object(snowflake.SnowflakeConnection, "execute")
+    @mock.patch.object(SourceFactory, "get_connection")
+    def test_execute_nok_with_csv_package(
+        self, mock_get_connection, mock_execute, mock_load
+    ):
+        mock_get_connection.return_value = None
+        assert SourceFactory().execute(query="irrelevant").empty
+        mock_load.assert_called_once()
+        mock_get_connection.assert_called_once()
+        assert 0 == mock_execute.call_count

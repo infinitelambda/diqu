@@ -2,7 +2,6 @@ import os
 import platform
 from contextlib import contextmanager
 from datetime import datetime
-from typing import Optional
 
 import pytz
 import requests

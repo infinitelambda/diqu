@@ -1,3 +1,4 @@
+import logging
 from unittest import mock
 
 from diqu.alerts.factory import AlertFactory
@@ -9,8 +10,9 @@ class TestAlertFactory:
         assert AlertFactory(to=[]).is_empty()
 
     def test_is_empty_true_with_warning(self, caplog):
-        assert AlertFactory(to=["not_exists_channel"]).is_empty()
-        assert "Module not_exists_channel could not be found" in caplog.text
+        with caplog.at_level(logging.DEBUG):
+            assert AlertFactory(to=["not_exists_channel"]).is_empty()
+            assert "Module not_exists_channel could not be found" in caplog.text
 
     def test_is_empty_false(self):
         assert not AlertFactory(to=["jira"]).is_empty()

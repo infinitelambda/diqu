@@ -22,6 +22,7 @@ class SourceFactory:
             file_path=f"{self.dbt_project_dir}/dbt_project.yml"
         ).get("profile", "diqu")
         self.target = kwargs.get("target")
+        self.package = kwargs.get("package")
 
     def get_connection(self) -> BaseConnection:
         """Get source module's connection
@@ -47,6 +48,12 @@ class SourceFactory:
             logger.info(f"Using dbt profiles.yml at: {self.dbt_profile_dir}")
             logger.info(f"Using {module_name} connection")
 
+            if self.package == "csv" and module_name != "csv":
+                logger.error(
+                    f"csv cannot be using any other source which is: {module_name}"
+                )
+                return None
+
             return load_module(name=module_name, package="diqu.sources").get_connection(
                 config=connection_config
             )
@@ -60,4 +67,8 @@ class SourceFactory:
         Returns:
             DataFrame: Query result
         """
-        return self.get_connection().execute(query=query)
+        conn = self.get_connection()
+        if conn:
+            return conn.execute(query=query)
+
+        return DataFrame()

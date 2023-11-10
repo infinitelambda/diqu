@@ -28,6 +28,7 @@ jira = "^3.5.2"
 pyyaml = "^6.0.1"
 slack-sdk = "^3.23.0"
 pandas = ">=1.0,<2.1"
+snowplow-tracker = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 snowflake-connector-python = {version = "^3.3.1", extras = ["secure-local-storage", "pandas"]}

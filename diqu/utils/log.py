@@ -28,6 +28,7 @@ class LogFormatter(logging.Formatter):
 
 logger = logging.getLogger("diqu")
 logger.setLevel(logging.DEBUG)
+logger.propagate = False
 
 if len(logger.handlers) == 0:
     ch = logging.StreamHandler()

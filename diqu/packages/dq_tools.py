@@ -29,22 +29,6 @@ class DqTools:
         Returns:
             str: SQL query string
         """
-        print(
-            string.Template(
-                self.query.take(self.query.file or "dq_tools__get_test_results.sql")
-            ).substitute(
-                filter=os.environ.get("JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY")
-                or "dq-tools",
-                deprecated_window_in_days=os.environ.get(
-                    "JIRA_ISSUE_DEPRECATED_WINDOW_IN_DAYS"
-                )
-                or "3",
-                update_window_in_days=os.environ.get(
-                    "JIRA_TICKET_UPDATE_WINDOW_IN_DAYS"
-                )
-                or "14",
-            )
-        )
         return string.Template(
             self.query.take(self.query.file or "dq_tools__get_test_results.sql")
         ).substitute(

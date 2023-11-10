@@ -1,4 +1,5 @@
 import os
+import re
 import string
 from datetime import datetime
 from typing import Any, List
@@ -56,12 +57,12 @@ class JiraBoard:
             "ORDER BY created DESC"
         ).substitute(
             project=self.project_id,
-            filter=os.environ.get("JIRA_OPEN_TICKETS_FILTER_BY_SUMMARY") or "dq-tools",
+            filter=os.environ.get("JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY") or "dq-tools",
         )
 
         try:
             open_issue_data = self.__get_issues(jql_filter=open_issues_filter)
-            joined = open_issue_data.merge(right=data, on="TEST_TITLE", how="outer")
+            joined = open_issue_data.merge(right=data, on="TEST_ID", how="outer")
             self.__create_issues(
                 data=joined.loc[
                     (joined["JIRA_ISSUE_KEY"].isnull())
@@ -92,7 +93,7 @@ class JiraBoard:
         data = data.fillna(0)
         description_template = string.Template(
             "h2. Test metadata:\n\n"
-            "- *Test ID*: $test_id\n"
+            "- *Test ID*: --- $test_id --- \n"
             "- *Latest Status*: $test_status\n\n"
             "- *Latest Run Timestamp*: $check_timestamp (UTC)\n"
             "- *Latest Run Failed Rate*: $failed_rate\n\n"
@@ -100,8 +101,8 @@ class JiraBoard:
             "- *Previous run timestamps (UTC)*: $prev_check_timestamps\n"
             "- *Previous # of failed records*: $prev_failed_counts\n"
             "- *Previous # of scanned records*: $prev_scanned_counts\n\n"
-            "- *tag | DQ Issue Type*: $dq_issue_type\n"
-            "- *tag | KPI Category*: $kpi_category\n\n"
+            "- *tag 1*: $tag_1\n"
+            "- *tag 2*: $tag_2\n\n"
             "h2. Jira automation process | modified at $current_datetime (UTC)"
         )
         return [
@@ -115,18 +116,17 @@ class JiraBoard:
                     prev_check_timestamps=row["PREV_CHECK_TIMESTAMPS"],
                     prev_failed_counts=row["PREV_NO_OF_RECORDS_FAILED"],
                     prev_scanned_counts=row["PREV_NO_OF_RECORDS_SCANNED"],
-                    dq_issue_type=row["DQ_ISSUE_TYPE"],
-                    kpi_category=row["KPI_CATEGORY"],
+                    tag_1=row["TAG_1"],
+                    tag_2=row["TAG_2"],
                     current_datetime=datetime.utcnow(),
                 ),
                 summary=row["TEST_TITLE"],
                 issuetype=dict(name=self.incident_type),
                 project=dict(id=self.project_id),
                 labels=[
-                    "AutomaticAlert",
                     "diqu",
-                    f"{str(row['DQ_ISSUE_TYPE']).replace(' ','_').replace('-','_')}",
-                    f"{str(row['KPI_CATEGORY']).replace(' ','_').replace('-','_')}",
+                    f"{str(row['TAG_1']).replace(' ','_').replace('-','_')}",
+                    f"{str(row['TAG_2']).replace(' ','_').replace('-','_')}",
                 ],
             )
             for _, row in data.iterrows()
@@ -143,10 +143,15 @@ class JiraBoard:
             DataFrame: Frame of Ticket No and Ticket Title
         """
         search_issues = self.conn.search_issues(jql_str=jql_filter, maxResults=limit)
+        regexp_str = "--- (.*) ---"  # test_id is wrapped between 2 '---'
         return DataFrame(
             {
                 "JIRA_ISSUE_KEY": [str(x.key) for x in search_issues],
-                "TEST_TITLE": [str(x.fields.summary).strip() for x in search_issues],
+                "TEST_ID": [
+                    re.search(regexp_str, str(x.fields.description)).group(1)
+                    for x in search_issues
+                    if re.search(regexp_str, str(x.fields.description)) is not None
+                ],
             }
         )
 

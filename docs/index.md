@@ -81,8 +81,8 @@ In particular to the alert module, here are the additional configurations:
   export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
   export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
   export JIRA_PROJECT_ID=your_project_id e.g. 106413
-  export JIRA_INCIDENT_TICKET_TYPE=your_issue_type, default to "[System] Incident"
-  export JIRA_OPEN_TICKETS_FILTER=your_issue_filter_on_title, default to "*dq_tools"
+  export JIRA_INCIDENT_ISSUE_TYPE=your_issue_type, default to "[System] Incident"
+  export JIRA_OPEN_ISSUES_FILTER=your_issue_filter_on_title, default to "*dq_tools"
   diqu alert --to jira
   ```
 

@@ -31,7 +31,7 @@ test_results_last_x_days as (  --  x = update_window_in_days
                 else 'Pass in test: '
             end as ticket_title__desc_text
             ,concat(
-                test_status_emoji, '| ',
+                test_status_emoji, ' | ',
                 ticket_title__desc_text,
                 ticket_title__test_id,
                 ' [$filter]'

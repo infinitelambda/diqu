@@ -9,9 +9,9 @@ from diqu.packages.query import Query
 class TestPackageQuery:
     def test_default_dir(self):
         query = Query()
-        assert query.dir.replace("\\\\", "/") == str(
+        assert query.dir.replace("\\", "/") == str(
             (Path.cwd() / "diqu/packages/include").absolute()
-        ).replace("\\\\", "/")
+        ).replace("\\", "/")
 
     @pytest.mark.parametrize(
         "sql_in, sql_out, query_schema, query_database",

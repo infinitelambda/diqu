@@ -6,20 +6,12 @@ from pathlib import Path
 import rich_click as click
 
 from diqu.utils.log import logger
+from diqu.utils.tracking import initialize_user_tracking, track_run
 
 VERSION = importlib.metadata.version("diqu")
 
 
-def common_logging(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        logger.info(f"Run with diqu=={VERSION} 🏃")
-        return func(*args, **kwargs)  # pragma: no cover
-
-    return wrapper
-
-
-def common_options(func):
+def options(func):
     @click.option(
         "--to",
         help="Specify the channel(s) of Alerts. Multiple options.",
@@ -109,6 +101,26 @@ def common_options(func):
     )
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
+        logger.info(f"Run with diqu=={VERSION} 🏃")
+        return func(*args, **kwargs)  # pragma: no cover
+
+    return wrapper
+
+
+def preflight(func):
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        # Get Context
+        ctx = click.get_current_context()
+
+        # Tracking
+        send_anonymous_usage_stats = True
+        if os.getenv("DO_NOT_TRACK", "").lower() in ("1", "t", "true", "y", "yes"):
+            send_anonymous_usage_stats = False
+        initialize_user_tracking(send_anonymous_usage_stats)
+        track_run(run_command=ctx.command.name, params=ctx.params, version=VERSION)
+
         return func(*args, **kwargs)  # pragma: no cover
 
     return wrapper

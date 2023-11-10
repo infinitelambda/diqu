@@ -23,10 +23,10 @@ def alert(data, limit: int = 3) -> ResultCode:
     """
     template_sum = string.Template(
         "🧵 *Summary on $date:*\n\n"
-        "  • ❗ $error_count error(s)\n"
-        "  • 👀 $warn_count warning(s)\n"
-        "  • ✅ $pass_count pass(es)\n"
-        "  • ✅ $deperecated_count deprecation(s)"
+        "  • 🔴 $error_count error(s)\n"
+        "  • 🟡 $warn_count warning(s)\n"
+        "  • 🟢 $pass_count pass(es)\n"
+        "  • ⚫ $deperecated_count deprecation(s)"
     )
     template_incident = string.Template("[$index] $incident\n")
     summary = (

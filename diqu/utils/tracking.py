@@ -1,11 +1,15 @@
+import os
 import platform
+from contextlib import contextmanager
 from datetime import datetime
 from typing import Optional
 
 import pytz
 import requests
 from snowplow_tracker import Emitter, StructuredEvent, Tracker
-from diqu.utils.log import logger
+from snowplow_tracker import logger as sp_logger
+
+sp_logger.setLevel(60)  # turn off snowplow logging
 
 COLLECTOR_URL = "com-infinitelambda1-saas1.collector.snplow.net"
 COLLECTOR_PROTOCOL = "https"
@@ -24,18 +28,18 @@ class TimeoutEmitter(Emitter):
 
     @staticmethod
     def handle_failure(num_ok, unsent):
-        disable_tracking()
+        sp_logger.info(f"Failed to track the event: num_ok={num_ok}, unsent={unsent}")
 
     def _log_request(self, request, payload):
-        logger.info(f"Sending {request} request to {self.endpoint}...")
-        logger.debug(f"Payload: {payload}")
+        sp_logger.info(f"Sending {request} request to {self.endpoint}...")
+        sp_logger.debug(f"Payload: {payload}")
 
     def _log_result(self, request, status_code):
         msg = f"{request} request finished with status code: {status_code}"
         if self.is_good_status_code(status_code):
-            logger.info(msg)
+            sp_logger.info(msg)
         else:
-            logger.warning(msg)
+            sp_logger.warning(msg)
 
     def http_post(self, payload):
         self._log_request("POST", payload)
@@ -55,14 +59,6 @@ class TimeoutEmitter(Emitter):
         return r
 
 
-e = TimeoutEmitter()
-tracker = Tracker(
-    namespace="snowplow_tracker",
-    app_id="diqu",
-    emitters=[e],
-)
-
-
 class User:
     def __init__(self) -> None:
         self.do_not_track = True
@@ -74,99 +70,100 @@ class User:
     def disable_tracking(self):
         self.do_not_track = True
 
-    def initialize(self):
+    def enable_tracking(self):
         self.do_not_track = False
 
 
-active_user: Optional[User] = None
+class SpTracker:
+    def __init__(self) -> None:
+        self.tracker = Tracker(
+            namespace="snowplow_tracker",
+            app_id="diqu",
+            emitters=[TimeoutEmitter()],
+        )
+        self.user = self.get_user()
 
+    def get_user(self):
+        send_anonymous_usage_stats = True
+        if os.getenv("DO_NOT_TRACK", "").lower() in ("1", "t", "true", "y", "yes"):
+            send_anonymous_usage_stats = False
 
-def get_platform_context():
-    return {
-        "platform": platform.platform(),
-        "python": platform.python_version(),
-        "python_version": platform.python_implementation(),
-    }
+        if send_anonymous_usage_stats:
+            active_user = User()
+            try:
+                active_user.enable_tracking()
+                return active_user
+            except Exception:
+                return User()
 
+        return User()
 
-def track(user, **kwargs):
-    if user.do_not_track:
-        return
-    else:
+    def track(self, **kwargs):
+        if self.user.do_not_track:
+            return
+        else:
+            try:
+                self.tracker.track(StructuredEvent(**kwargs))
+            except Exception:
+                return False
+        return True
+
+    def get_platform_context(self):
+        return {
+            "platform": platform.platform(),
+            "python": platform.python_version(),
+            "python_version": platform.python_implementation(),
+        }
+
+    def track_invocation_start(self, invocation_context):
+        assert (
+            self.user is not None
+        ), "Cannot track invocation end when active user is None"
+        data = {"invocation_context": invocation_context}
+        data.update(self.get_platform_context())
+
+        return self.track(
+            category="diqu",
+            action="invocation",
+            label="start",
+            property_=str(data),
+        )
+
+    def track_invocation_end(self, invocation_context, result_type=None):
+        assert (
+            self.user is not None
+        ), "Cannot track invocation end when active user is None"
+        data = {"invocation_context": invocation_context, "result_type": result_type}
+        data.update(self.get_platform_context())
+
+        return self.track(
+            category="diqu",
+            action="invocation",
+            label="end",
+            property_=str(data),
+        )
+
+    def flush(self):
         try:
-            struct_event = StructuredEvent(**kwargs)
-            tracker.track(struct_event)
+            self.tracker.flush()
         except Exception:
             pass
 
 
-def flush():
-    try:
-        tracker.flush()
-    except Exception:
-        pass
-
-
-def disable_tracking():
-    global active_user
-    if active_user is not None:
-        active_user.disable_tracking()
-    else:
-        active_user = User(None)
-
-
-def track_invocation_start(invocation_context):
-    assert (
-        active_user is not None
-    ), "Cannot track invocation end when active user is None"
-    data = {"invocation_context": invocation_context}
-    data.update(get_platform_context())
-
-    track(
-        active_user,
-        category="diqu",
-        action="invocation",
-        label="start",
-        property_=str(data),
-    )
-
-
-def track_invocation_end(invocation_context, result_type=None):
-    assert (
-        active_user is not None
-    ), "Cannot track invocation end when active user is None"
-
-    data = {"invocation_context": invocation_context, "result_type": result_type}
-    data.update(get_platform_context())
-
-    track(
-        active_user,
-        category="diqu",
-        action="invocation",
-        label="end",
-        property_=str(data),
-    )
-
-
-def initialize_user_tracking(send_anonymous_usage_stats: bool = False):
-    global active_user
-    if send_anonymous_usage_stats:
-        active_user = User()
-        try:
-            active_user.initialize()
-        except Exception:
-            active_user = User(None)
-    else:
-        active_user = User(None)
-
-
+@contextmanager
 def track_run(run_command=None, params=None, version=None):
-    invocation_context = {"command": run_command, "params": params, "version": version}
-
-    track_invocation_start(invocation_context)
+    tracker = SpTracker()
+    invocation_context = {
+        "command": run_command,
+        "params": params,
+        "version": version,
+    }
+    tracker.track_invocation_start(invocation_context)
     try:
-        track_invocation_end(invocation_context, result_type="ok")
+        yield
+        tracker.track_invocation_end(invocation_context, result_type="ok")
     except Exception:
-        track_invocation_end(invocation_context, result_type="error")
+        tracker.track_invocation_end(invocation_context, result_type="error")
+        raise
     finally:
-        flush()
+        tracker.flush()

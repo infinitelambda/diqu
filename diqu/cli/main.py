@@ -21,7 +21,7 @@ def diqu(ctx, **kwargs):
 @diqu.command(name="alert")
 @click.pass_context
 @common.options
-# @common.preflight
+@common.preflight
 def alert(ctx, **kwargs):
     """Alert the incidents"""
     exit(AlertTask(**kwargs).run())

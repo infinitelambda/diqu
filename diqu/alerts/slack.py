@@ -23,10 +23,10 @@ def alert(data, limit: int = 3) -> ResultCode:
     """
     template_sum = string.Template(
         "🧵 *Summary on $date:*\n\n"
-        "  • ❗ $error_count error(s)\n"
-        "  • 👀 $warn_count warning(s)\n"
-        "  • ✅ $pass_count pass(es)\n"
-        "  • ✅ $deperecated_count deprecation(s)"
+        "  • 🔴 $error_count error(s)\n"
+        "  • 🟡 $warn_count warning(s)\n"
+        "  • 🟢 $pass_count pass(es)\n"
+        "  • ⚫ $deperecated_count deprecation(s)"
     )
     template_incident = string.Template("[$index] $incident\n")
     summary = (
@@ -54,7 +54,7 @@ def alert(data, limit: int = 3) -> ResultCode:
     for i in range(len(incident_data)):
         incidents += template_incident.substitute(
             index=i + 1,
-            incident=incident_data.iloc[0, 0],  # JIRA_TICKET_SUMMARY
+            incident=incident_data.iloc[i, 0],  # first column: TEST_TITLE
         )
 
     r = Slack().post_message(

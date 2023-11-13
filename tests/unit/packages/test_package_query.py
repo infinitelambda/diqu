@@ -19,32 +19,32 @@ class TestPackageQuery:
             ("data_1", "data_1", None, None),
             ("data_2", "data_2", None, None),
             (
-                "select * from @schema.table",
+                "select * from $schema.table",
                 "select * from schema_1.table",
                 "schema_1",
                 None,
             ),
-            ("select * from @schema.table", "select * from table", None, None),
+            ("select * from $schema.table", "select * from table", None, None),
             (
-                "select * from @database.@schema.table",
+                "select * from $database.$schema.table",
                 "select * from database_1.schema_1.table",
                 "schema_1",
                 "database_1",
             ),
             (
-                "select * from @database.@schema.table",
+                "select * from $database.$schema.table",
                 "select * from schema_1.table",
                 "schema_1",
                 None,
             ),
             (
-                "select * from @database.@schema.table",
+                "select * from $database.$schema.table",
                 "select * from table",
                 None,
                 None,
             ),
             (
-                "select * from @database.@schema.table",
+                "select * from $database.$schema.table",
                 "select * from database_1.table",  # invalid case but valid flow
                 None,
                 "database_1",

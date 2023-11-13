@@ -36,13 +36,13 @@ class Query:
             with open(query_file, "r") as content:
                 sql = content.read()
                 if self.database:
-                    sql = sql.replace("@database", self.database)
+                    sql = sql.replace("$database", self.database)
                 else:
-                    sql = sql.replace("@database.", "")  # assume current db
+                    sql = sql.replace("$database.", "")  # assume current db
 
                 if self.schema:
-                    sql = sql.replace("@schema", self.schema)
+                    sql = sql.replace("$schema", self.schema)
                 else:
-                    sql = sql.replace("@schema.", "")  # assume current schema
+                    sql = sql.replace("$schema.", "")  # assume current schema
 
                 return sql

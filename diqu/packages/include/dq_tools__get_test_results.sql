@@ -1,11 +1,11 @@
-/* Get the the test result of the last 14 days */
+/* Get the the test result of the last x days */
 with
 
 source as (
-    select * from @database.@schema.dq_issue_log
+    select * from $database.$schema.dq_issue_log
 ),
 
-test_results_last_14_days as (
+test_results_last_x_days as (  --  x = update_window_in_days
     select  *
             ,concat(
                 coalesce(nullif(split(table_name,'.')[2],''),'-'),'|',
@@ -15,14 +15,15 @@ test_results_last_14_days as (
                 test_unique_id
             ) as test_id
             ,case
-                when no_of_records_failed > 0 and severity = 'error' then 'failed'
+                when no_of_records_failed > 0 and severity = 'error' then 'fail'
                 when no_of_records_failed > 0 and severity = 'warn' then 'warn'
                 else 'pass'
             end as test_status
             ,case
-                when test_status = 'failed' then '🔴'
+                when test_status = 'fail' then '🔴'
                 when test_status = 'warn' then '🟡'
-                else '✅'
+                when test_status = 'pass' then '🟢'
+                else ''
             end as test_status_emoji
 
     from    source
@@ -31,13 +32,14 @@ test_results_last_14_days as (
         and table_name not ilike '%bi_column_analysis%'
         and table_name not ilike '%bi_dq_metrics%'
         and table_name not ilike '%test_coverage%'
-        --time limited to the last 14 days
-        and check_timestamp > dateadd(day, -14, sysdate())
+        --time limited to the last X days
+        and check_timestamp > dateadd(day, -$update_window_in_days, sysdate())
 ),
 
 latest_status as (
 
     select  test_id
+            ,test_unique_id
             ,test_status
             ,test_status_emoji
             ,check_timestamp
@@ -46,7 +48,7 @@ latest_status as (
             ,dq_issue_type
             ,kpi_category
 
-    from    test_results_last_14_days
+    from    test_results_last_x_days
 
     qualify row_number() over (partition by test_id order by check_timestamp desc) = 1
 
@@ -55,28 +57,42 @@ latest_status as (
 prev_statuses as (
 
     select  test_id
+            ,test_unique_id
             ,array_agg(test_status_emoji) within group (order by check_timestamp desc) as prev_statuses
             ,array_agg(check_timestamp) within group (order by check_timestamp desc) as prev_check_timestamps
             ,array_agg(no_of_records_scanned) within group (order by check_timestamp desc) as prev_no_of_records_scanned
             ,array_agg(no_of_records_failed) within group (order by check_timestamp desc) as prev_no_of_records_failed
 
-    from    test_results_last_14_days
+    from    test_results_last_x_days
 
-    group by test_id
+    group by test_id, test_unique_id
 
-)
+),
 
-select      concat(
-                latest_status.test_status_emoji, ': ',
-                latest_status.test_id,
-                ' [dq-tools]'
-            ) as jira_ticket_summary
-            ,latest_status.test_id
+final as (
+    select  latest_status.test_id
             ,case
-                when datediff(day, latest_status.check_timestamp, sysdate()) >=3 then 'deprecated'
+                when datediff(day, latest_status.check_timestamp, sysdate()) >= $deprecated_window_in_days then 'deprecate'
                 else latest_status.test_status
-            end as test_status
-            ,latest_status.test_status_emoji
+            end as test_status_add_deprecation
+            ,case
+                when test_status_add_deprecation = 'deprecate' then '⚫'
+                else latest_status.test_status_emoji
+            end as test_status_emoji_add_deprecation
+            ,split_part(latest_status.test_unique_id, '.', -2) || '.' || split_part(latest_status.test_unique_id, '.', -1) as test_title__test_id
+            ,case
+                when test_status_add_deprecation = 'fail' then 'Failure in test: '
+                when test_status_add_deprecation = 'warn' then 'Warning in test: '
+                when test_status_add_deprecation = 'deprecate' then 'Deprecation in test: '
+                when test_status_add_deprecation = 'pass' then 'Pass in test: '
+                else ''
+            end as test_title__desc_text
+            ,concat(
+                test_status_emoji_add_deprecation, ' | ',
+                test_title__desc_text,
+                test_title__test_id,
+                ' [$filter]'
+            ) as test_title
             ,latest_status.check_timestamp
             ,latest_status.no_of_records_scanned
             ,latest_status.no_of_records_failed
@@ -87,9 +103,25 @@ select      concat(
             ,prev_statuses.prev_check_timestamps
             ,prev_statuses.prev_no_of_records_scanned
             ,prev_statuses.prev_no_of_records_failed
-            ,1 as priority --IMPORTANT: use your own logic to define the Priority
+            ,1 as priority  -- IMPORTANT: use your own logic to define the Priority
 
-from        latest_status
-left join   prev_statuses using (test_id)
+    from    latest_status
+    left join prev_statuses using (test_id)
+)
 
-order by    priority
+select  test_id
+        ,test_status_add_deprecation as test_status
+        ,test_title
+        ,check_timestamp
+        ,no_of_records_scanned
+        ,no_of_records_failed
+        ,failed_rate
+        ,dq_issue_type as tag_1
+        ,kpi_category as tag_2
+        ,prev_statuses
+        ,prev_check_timestamps
+        ,prev_no_of_records_scanned
+        ,prev_no_of_records_failed
+        ,priority
+from final
+order by priority

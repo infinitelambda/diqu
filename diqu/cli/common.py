@@ -82,7 +82,7 @@ def options(func):
     @click.option(
         "--query-database",
         help=(
-            "Use it when configuring the '@database' in the query. "
+            "Use it when configuring the '$database' in the query. "
             "Assuming the current connection database context if not configured."
         ),
         default=None,
@@ -92,7 +92,7 @@ def options(func):
     @click.option(
         "--query-schema",
         help=(
-            "Use it when configuring the '@schema' in the query. "
+            "Use it when configuring the '$schema' in the query. "
             "Assuming the current connection schema context if not configured."
         ),
         default=None,

@@ -55,7 +55,7 @@ diqu alert --to jira
 04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
 04:33:19  diqu: INFO - Using snowflake connection
 04:33:19  diqu: INFO - Looking for the query in: /path/to/file.sql
-04:33:23  diqu: INFO - Alerting to channel: JIRA
+04:33:23  diqu: INFO - Alerting to: JIRA
 04:33:23  diqu: INFO - ✅ Done > JIRA
 ```
 
@@ -78,7 +78,7 @@ In particular to the alert module, here are the additional configurations:
   ```
 
 - For JIRA, you need to use the environment variables to configure the JIRA Board:
-  
+
   <details> <!-- markdownlint-disable no-inline-html -->
     <summary>preflight</summary>
 

@@ -36,11 +36,11 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
     _Auto Alert, our savior, arrives._
 
-<img src="assets/img/diqu_concept.jpeg" alt="diqu Concept" width="600"> <!-- markdownlint-disable no-inline-html -->
+<img src="assets/img/diqu_concept.jpeg" alt="diqu Concept"> <!-- markdownlint-disable no-inline-html -->
 
 In the efforts of making our bug's life easier, `diqu` CLI is born with a significant impact, streamlining collaboration and enhancing agility in our daily tasks. This tool takes charge of handling the beloved "chick" of our engineering world: **Anomalies** or **Incidents** 🐞
 
-Alongside our methods for detecting these anomalies in our data, it's important to ensure the Auto Alert trigger is firmly in place, ready to notify us promptly. Together, these innovations pave the way for a more efficient and seamless bug-fighting experience 🚀
+Alongside our methods for detecting these anomalies in our data, **it's important to ensure the Auto Alert trigger is firmly in place, ready to notify us promptly**. Together, these innovations pave the way for a more efficient and seamless bug-fighting experience 🚀
 
 ## Usage
 
@@ -49,46 +49,59 @@ dbt run -s dq_tools # optional
 diqu alert --to jira
 ```
 
-<details> <!-- markdownlint-disable no-inline-html -->
-  <summary>Sample logs</summary>
-
-  ```log
-  04:33:17  diqu: INFO - Run with diqu==1.0.0 🏃
-  04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
-  04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
-  04:33:19  diqu: INFO - Using snowflake connection
-  04:33:19  diqu: INFO - Looking for the query in: /path/to/file.sql
-  04:33:23  diqu: INFO - Alerting to: JIRA
-  04:33:23  diqu: INFO - ✅ Done > JIRA
-  ```
-
-</details>
+```log
+04:33:17  diqu: INFO - Run with diqu==1.0.0 🏃
+04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
+04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
+04:33:19  diqu: INFO - Using snowflake connection
+04:33:19  diqu: INFO - Looking for the query in: /path/to/file.sql
+04:33:23  diqu: INFO - Alerting to: JIRA
+04:33:23  diqu: INFO - ✅ Done > JIRA
+```
 
 In particular to the alert module, here are the additional configurations:
 
 - For SLACK, you need to use the environment variables to configure the Slack Channel:
 
+  <details> <!-- markdownlint-disable no-inline-html -->
+    <summary>preflight</summary>
+
+    ```bash
+    export SLACK_TOKEN=your_token
+    export SLACK_CHANNEL=your_channel_name
+    ```
+
+  </details>
+
   ```bash
-  export SLACK_TOKEN=your_token
-  export SLACK_CHANNEL=your_channel_name
   diqu alert --to slack
   ```
 
 - For JIRA, you need to use the environment variables to configure the JIRA Board:
 
+  <details> <!-- markdownlint-disable no-inline-html -->
+    <summary>preflight</summary>
+
+    ```bash
+    export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
+    export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
+    export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
+    export JIRA_PROJECT_ID=your_project_id e.g. 106413
+    export JIRA_INCIDENT_TICKET_TYPE=your_ticket_type, default to "[System] Incident"
+    export JIRA_OPEN_TICKETS_FILTER=your_ticket_filter_on_title, default to "*dq_tools"
+    ```
+
+  </details>
+
   ```bash
-  export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
-  export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
-  export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
-  export JIRA_PROJECT_ID=your_project_id e.g. 106413
-  export JIRA_INCIDENT_ISSUE_TYPE=your_issue_type, default to "[System] Incident"
-  export JIRA_OPEN_ISSUES_FILTER=your_issue_filter_on_title, default to "*dq_tools"
   diqu alert --to jira
   ```
 
 ## How to Contribute
 
-👉 See [CONTRIBUTING.md](./nav/dev/contributing.html)
+This Auto Alert (`diqu`) tool is an open source software. Whether you are a seasoned open source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
+
+👉 See [CONTRIBUTING guideline](./nav/dev/contributing.html) for more details
 
 ## About Infinite Lambda
 

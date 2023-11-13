@@ -32,11 +32,24 @@ class SnowflakeConnection(BaseConnection):
             schema=self.get_profile_config("schema"),
             session_parameters={"QUERY_TAG": "diqu.sources.snowflake"},
         )
+
         if self.config.get("authenticator"):
             clean_config.pop("password")
             clean_config["authenticator"] = "externalbrowser"
             clean_config["client_request_mfa_token"] = True
 
+        if self.config.get("private_key") or self.config.get("private_key_path"):
+            clean_config.pop("password")
+            if self.config.get("private_key"):
+                clean_config["private_key"] = self.get_profile_config("private_key")
+            else:
+                clean_config["private_key_path"] = self.get_profile_config(
+                    "private_key_path"
+                )
+            clean_config["private_key_passphrase"] = self.get_profile_config(
+                "private_key_passphrase"
+            )
+        
         self.conn = snowflake.connector.connect(**clean_config)
 
     def execute(self, query: str) -> DataFrame:

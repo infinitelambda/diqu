@@ -72,8 +72,8 @@ In particular to the alert module, here are the additional configurations:
   export JIRA_PROJECT_ID=your_project_id e.g. 106413
   export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
   export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
-  export JIRA_ISSUE_DEPRECATED_WINDOW_IN_DAYS=your_issue_deprecation_time_in_day, default to "3"
-  export JIRA_ISSUE_UPDATE_WINDOW_IN_DAYS=your_issue_historical_data_update_window_in_days, default to "14"
+  export ISSUE_DEPRECATED_WINDOW_IN_DAYS=your_issue_deprecation_time_in_day, default to "3"
+  export ISSUE_UPDATE_WINDOW_IN_DAYS=your_issue_historical_data_update_window_in_days, default to "14"
   diqu alert --to jira
   ```
 

@@ -34,9 +34,9 @@ class DqTools:
         ).substitute(
             filter=os.environ.get("JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY") or "dq-tools",
             deprecated_window_in_days=os.environ.get(
-                "JIRA_ISSUE_DEPRECATED_WINDOW_IN_DAYS"
+                "ISSUE_DEPRECATED_WINDOW_IN_DAYS"
             )
             or "3",
-            update_window_in_days=os.environ.get("JIRA_ISSUE_UPDATE_WINDOW_IN_DAYS")
+            update_window_in_days=os.environ.get("ISSUE_UPDATE_WINDOW_IN_DAYS")
             or "14",
         )

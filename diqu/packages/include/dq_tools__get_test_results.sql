@@ -22,7 +22,8 @@ test_results_last_x_days as (  --  x = update_window_in_days
             ,case
                 when test_status = 'fail' then '🔴'
                 when test_status = 'warn' then '🟡'
-                else '🟢'
+                when test_status = 'pass' then '🟢'
+                else ''
             end as test_status_emoji
 
     from    source
@@ -83,7 +84,8 @@ final as (
                 when test_status_add_deprecation = 'fail' then 'Failure in test: '
                 when test_status_add_deprecation = 'warn' then 'Warning in test: '
                 when test_status_add_deprecation = 'deprecate' then 'Deprecation in test: '
-                else 'Pass in test: '
+                when test_status_add_deprecation = 'pass' then 'Pass in test: '
+                else ''
             end as test_title__desc_text
             ,concat(
                 test_status_emoji_add_deprecation, ' | ',

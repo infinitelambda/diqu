@@ -103,7 +103,7 @@ class JiraBoard:
             "- *Previous # of scanned records*: $prev_scanned_counts\n\n"
             "- *tag 1*: $tag_1\n"
             "- *tag 2*: $tag_2\n\n"
-            "h2. Jira automation process | modified at $current_datetime (UTC)"
+            "h2. Managed by diqu | modified at $current_datetime (UTC)"
         )
         return [
             dict(

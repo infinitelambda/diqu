@@ -110,8 +110,8 @@ class SpTracker:
     def get_platform_context(self):
         return {
             "platform": platform.platform(),
-            "python": platform.python_version(),
-            "python_version": platform.python_implementation(),
+            "python": platform.python_implementation(),
+            "python_version": platform.python_version(),
         }
 
     def track_invocation_start(self, invocation_context):

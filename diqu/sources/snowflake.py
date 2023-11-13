@@ -49,7 +49,7 @@ class SnowflakeConnection(BaseConnection):
             clean_config["private_key_passphrase"] = self.get_profile_config(
                 "private_key_passphrase"
             )
-        
+
         self.conn = snowflake.connector.connect(**clean_config)
 
     def execute(self, query: str) -> DataFrame:

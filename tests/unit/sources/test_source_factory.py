@@ -65,10 +65,12 @@ class TestSourceFactory:
         mock_load.assert_called_once_with(file_path=f"{dbt_profile_dir}/profiles.yml")
         mock_load_module.assert_called_once()
         mock_get_connection.assert_called_once()
+        snowflake.SnowflakeConnection.clear()
 
     def test_get_connection_error_as_invalid_profile_file_path(self):
         with pytest.raises(click.FileError):
             SourceFactory(**dict(profiles_dir="invalid/path")).get_connection()
+        snowflake.SnowflakeConnection.clear()
 
     def test_get_connection_error_as_invalid_profile_file_content(self):
         with mock.patch(
@@ -86,6 +88,7 @@ class TestSourceFactory:
             file_path=f"{(Path.home() / '.dbt')}/profiles.yml"
         )
         assert 0 == mock_load_module.call_count
+        snowflake.SnowflakeConnection.clear()
 
     @mock.patch("diqu.utils.yml.load", return_value=dict(data="irrelevant"))
     @mock.patch.object(snowflake.SnowflakeConnection, "execute")
@@ -97,6 +100,7 @@ class TestSourceFactory:
         mock_load.assert_called_once()
         mock_get_connection.assert_called_once()
         mock_execute.assert_called_once()
+        snowflake.SnowflakeConnection.clear()
 
     @pytest.mark.parametrize(
         "kwargs",
@@ -121,6 +125,7 @@ class TestSourceFactory:
         mock_load.assert_called_once()
         assert 0 == mock_load_module.call_count
         assert 0 == mock_get_connection.call_count
+        snowflake.SnowflakeConnection.clear()
 
     @mock.patch("diqu.utils.yml.load", return_value=dict(data="irrelevant"))
     @mock.patch.object(snowflake.SnowflakeConnection, "execute")
@@ -133,3 +138,4 @@ class TestSourceFactory:
         mock_load.assert_called_once()
         mock_get_connection.assert_called_once()
         assert 0 == mock_execute.call_count
+        snowflake.SnowflakeConnection.clear()

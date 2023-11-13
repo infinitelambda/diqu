@@ -1,7 +1,7 @@
-ci:
-  target: snowflake
+diqu:
+  target: target_1
   outputs:
-    snowflake:
+    target_1: # Using Snowflake
       type: snowflake
       account: "{{ env_var('DBT_SNOWFLAKE_TEST_ACCOUNT') }}"
       user: "{{ env_var('DBT_SNOWFLAKE_TEST_USER') }}"
@@ -11,7 +11,6 @@ ci:
       warehouse: "{{ env_var('DBT_SNOWFLAKE_TEST_WAREHOUSE') }}"
       schema: "{{ env_var('DBT_SCHEMA') }}"
       threads: 10
-    csv:
-      type: csv
-      dir: ./.cache
-      # dir: "{{ env_var('DQT_CSV_DIR') }}"
+    target_2: # Using csv
+      type: csv 
+      dir: ./.cache # "{{ env_var('DQT_CSV_DIR') }}"

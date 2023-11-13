@@ -32,6 +32,7 @@ class TestSourceBase:
     )
     def test_get_profile_config(self, config, attr, result):
         assert result == DummyConnection(**config).get_profile_config(attr=attr)
+        DummyConnection.clear()
 
     @pytest.mark.parametrize(
         "config, attr, attr_env_value, result",
@@ -51,3 +52,4 @@ class TestSourceBase:
             assert result == DummyConnectionEnvVar(**config).get_profile_config(
                 attr=attr
             )
+            DummyConnectionEnvVar.clear()

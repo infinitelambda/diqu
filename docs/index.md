@@ -58,7 +58,7 @@ diqu alert --to jira
   04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
   04:33:19  diqu: INFO - Using snowflake connection
   04:33:19  diqu: INFO - Looking for the query in: /path/to/file.sql
-  04:33:23  diqu: INFO - Alerting to module: JIRA
+  04:33:23  diqu: INFO - Alerting to: JIRA
   04:33:23  diqu: INFO - ✅ Done > JIRA
   ```
 

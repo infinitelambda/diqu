@@ -20,11 +20,11 @@ class TestAlertFactory:
     @mock.patch("diqu.alerts.jira.alert")
     def test_run(self, mock_alert, caplog):
         AlertFactory(to=["jira"]).run(data="irrelevant")
-        assert "Alerting to module: JIRA" in caplog.text
+        assert "Alerting to: JIRA" in caplog.text
         assert 1 == mock_alert.call_count
 
     @mock.patch("diqu.alerts.jira.alert")
     def test_run_no_channel(self, mock_alert, caplog):
         AlertFactory().run(data="irrelevant")
-        assert "Alerting to module:" not in caplog.text
+        assert "Alerting to:" not in caplog.text
         assert 0 == mock_alert.call_count

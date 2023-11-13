@@ -30,5 +30,5 @@ class AlertFactory:
             data (DataFrame): Incident data collected
         """
         for c in self.channels:
-            logger.info(f"Alerting to module: {str(c.__name__).split('.')[-1].upper()}")
+            logger.info(f"Alerting to: {str(c.__name__).split('.')[-1].upper()}")
             c.alert(data=data)

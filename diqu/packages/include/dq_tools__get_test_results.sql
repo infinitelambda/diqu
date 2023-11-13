@@ -71,18 +71,18 @@ prev_statuses as (
 final as (
     select  latest_status.test_id
             ,case
-                when datediff(day, latest_status.check_timestamp, sysdate()) >= $deprecated_window_in_days then 'deprecated'
+                when datediff(day, latest_status.check_timestamp, sysdate()) >= $deprecated_window_in_days then 'deprecate'
                 else latest_status.test_status
             end as test_status_add_deprecation
             ,case
-                when test_status_add_deprecation = 'deprecated' then '⚫'
+                when test_status_add_deprecation = 'deprecate' then '⚫'
                 else latest_status.test_status_emoji
             end as test_status_emoji_add_deprecation
             ,split_part(latest_status.test_unique_id, '.', -2) || '.' || split_part(latest_status.test_unique_id, '.', -1) as test_title__test_id
             ,case
-                when test_status_add_deprecation = 'failed' then 'Failure in test: '
+                when test_status_add_deprecation = 'fail' then 'Failure in test: '
                 when test_status_add_deprecation = 'warn' then 'Warning in test: '
-                when test_status_add_deprecation = 'deprecated' then 'Deprecation in test: '
+                when test_status_add_deprecation = 'deprecate' then 'Deprecation in test: '
                 else 'Pass in test: '
             end as test_title__desc_text
             ,concat(

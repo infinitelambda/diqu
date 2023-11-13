@@ -1,4 +1,4 @@
-# Anonymous usage stats tracking
+# Anonymous usage stats
 
 We aim to enhance the functionality of diqu by gaining insights into user interactions. As part of this effort, we have implemented straightforward event tracking within diqu, utilizing Snowplow.
 It is important to note that we do not collect credentials or any other type of private info, as we consider this information outside the scope of our interest.

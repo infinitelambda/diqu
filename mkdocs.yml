@@ -23,6 +23,7 @@ nav:
       - Packages Configuration:
         - DQ Tools: nav/guide/config/packages/dq-tools.md
         - Custom query: nav/guide/config/packages/custom.md
+      - Anonymous usage stats: nav/guide/config/usage_stats.md
     - CLI Reference: nav/guide/cli.md
     - Contribution Guideline: nav/dev/contributing.md
     - Change Log ↗️: https://github.com/infinitelambda/diqu/releases" target="_blank

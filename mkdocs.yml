@@ -14,15 +14,16 @@ nav:
     - Quick Start: index.md
     - User Guide:
       - General: nav/guide/common.md
-      - Alert Modules Configuration:
-        - Slack: nav/guide/config/alerts/slack.md
-        - JIRA: nav/guide/config/alerts/jira.md
-      - Sources Modules Configuration:
-        - Snowflake: nav/guide/config/sources/snowflake.md
-        - Custom via CSV file: nav/guide/config/sources/custom.md
-      - Packages Module Configuration:
-        - DQ Tools: nav/guide/config/packages/dq-tools.md
-        - Custom query: nav/guide/config/packages/custom.md
+      - Source Modules:
+        - Snowflake Config: nav/guide/config/sources/snowflake.md
+        - Custom CSV File Config: nav/guide/config/sources/custom_csv.md
+      - Package Modules:
+        - Query Variables Config: nav/guide/config/packages/query_variables.md
+        - DQ Tools Config: nav/guide/config/packages/dq-tools.md
+        - Custom Query Config: nav/guide/config/packages/custom_query.md
+      - Alert Modules:
+        - Slack Config: nav/guide/config/alerts/slack.md
+        - JIRA Config: nav/guide/config/alerts/jira.md
       - Anonymous usage stats: nav/guide/config/usage_stats.md
     - CLI Reference: nav/guide/cli.md
     - Contribution Guideline: nav/dev/contributing.md

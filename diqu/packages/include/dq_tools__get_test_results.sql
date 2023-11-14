@@ -2,10 +2,13 @@
 with
 
 source as (
+
     select * from $database.$schema.dq_issue_log
+
 ),
 
 test_results_last_x_days as (  --  x = update_window_in_days
+
     select  *
             ,concat(
                 coalesce(nullif(split(table_name,'.')[2],''),'-'),'|',
@@ -34,6 +37,7 @@ test_results_last_x_days as (  --  x = update_window_in_days
         and table_name not ilike '%test_coverage%'
         --time limited to the last X days
         and check_timestamp > dateadd(day, -$update_window_in_days, sysdate())
+
 ),
 
 latest_status as (
@@ -70,6 +74,7 @@ prev_statuses as (
 ),
 
 final as (
+
     select  latest_status.test_id
             ,case
                 when datediff(day, latest_status.check_timestamp, sysdate()) >= $deprecated_window_in_days then 'deprecate'
@@ -107,6 +112,7 @@ final as (
 
     from    latest_status
     left join prev_statuses using (test_id)
+
 )
 
 select  test_id
@@ -123,5 +129,7 @@ select  test_id
         ,prev_no_of_records_scanned
         ,prev_no_of_records_failed
         ,priority
-from final
+
+from    final
+
 order by priority

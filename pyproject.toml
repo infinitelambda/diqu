@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "diqu"
 version = "0.0.0"
-description = "CLI Companion Tool with built-in Alert / Notification features for dq-tools and maybe more with empowering bug management with streamlined collaboration, agility, and automated anomaly alerts for a more efficient bug-fighting experience 🐞🚀"
+description = "Data Quality CLI for the Auto-Alerts"
 authors = ["Infinite Lambda <contact@infinitelambda.com>"]
 readme = "README.md"
-license = "LICENSE"
+license = "Apache-2.0"
 repository = "https://github.com/infinitelambda/diqu"
 homepage = "https://infinitelambda.com"
 documentation = "https://diqu.iflambda.com/latest/"

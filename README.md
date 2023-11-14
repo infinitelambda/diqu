@@ -7,13 +7,34 @@
 [![python](https://img.shields.io/badge/Python-3.9|3.10|3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![codecov](https://codecov.io/gh/infinitelambda/diqu/graph/badge.svg?token=JUO2ASNQEB)](https://codecov.io/gh/infinitelambda/diqu)
 
-CLI Companion Tool with built-in Alert / Notification features for [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) and maybe more with empowering bug management with streamlined collaboration, agility, and automated anomaly alerts for a more efficient bug-fighting experience 🐞🚀.
+Automate and streamline the notification process for dbt test results using this versatile CLI companion tool. Receive detailed alerts seamlessly on various platforms, promoting improved collaboration on dbt project issues 🐞🚀.
 
-> 🔴 🟡 ⚫ ✅ </br>
->_In the realm where circuits hum and wires entwine,_</br>
->_A bug’s life, oh, how it’s truly divine._</br>
->_In the world of engineering, where chaos thrives,_</br>
->_Auto Alert, our savior, arrives._
+Features
+- Automated alerts and notifications based on recorded dbt test results.
+- Built-in support for dq-tools and custom query input.
+- Auto-labels `deprecated` tests for quick & easy identification.
+- Sends compact and succinct messages to a dedicated Slack channel.
+- Creates and updates Jira tickets with the latest tests' metadata.
+
+Supported input modules (dbt test results):
+- [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
+- Custom query
+
+Supported output modules (alert/ notification):
+- CSV
+- Jira
+- Slack
+
+Supported [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) metadata:
+- Latest & historical tests' statuses, timestamps, row failed counts, row scanned counts, and failed rate.
+- `deprecated` status for tests that are not executed and recorded in x days.
+- Tests labels (dq_issue_type, kpi_category)
+
+> dbt alert rant 🟢 🟡 🔴 ⚫ </br>
+>_Run errors are red,_</br>
+>_Test warnings are yellow,_</br>
+>_Where's my bug alert,_</br>
+>_And joint bugfix workflow?_
 
 <img src="./docs/assets/img/diqu_concept.jpeg" alt="diqu Concept"> <!-- markdownlint-disable no-inline-html -->
 
@@ -23,7 +44,8 @@ CLI Companion Tool with built-in Alert / Notification features for [![dq-tools](
 pip install diqu [--upgrade]
 ```
 
-📓 The DWH module should be available already if you use `diqu` CLI in a `dbt` project, if not, please perform additional installation, for example, snowflake module:
+📓 _NOTE_: The Data Warehouse (DWH) module should already be installed if you are using `diqu` in a working dbt project. If not, please perform additional steps to install these DWH modules.
+For example, if you're using snowflake:
 
 ```bash
 pip install "snowflake-connector-python[pandas]"
@@ -46,9 +68,9 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
 </details>
 
-```bash
-diqu alert --to slack --to jira
-```
+  ```bash
+  diqu alert --to slack --to jira
+  ```
 
 ```log
 04:33:17  diqu: INFO - Run with diqu==1.0.0 🏃
@@ -62,37 +84,43 @@ diqu alert --to slack --to jira
 04:33:23  diqu: INFO - ✅ Done > JIRA
 ```
 
-In particular to the alert module, here are the additional configurations:
+## Output module configurations
+### Slack
 
-- For SLACK, you need to use the environment variables to configure the Slack Channel:
+- Use the environment variables to configure the Slack Channel:
 
-  ```bash
-  export SLACK_TOKEN=your_token
-  export SLACK_CHANNEL=your_channel_name
-  diqu alert --to slack
-  ```
+    ```bash
+    export SLACK_TOKEN=your_token
+    export SLACK_CHANNEL=your_channel_name
+    ```
+    ```bash
+    diqu alert --to slack
+    ```
 
-- For JIRA, you need to use the environment variables to configure the JIRA Board:
+### Jira Board
+- Use the environment variables to configure the JIRA Board:
 
-  ```bash
-  export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
-  export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
-  export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
-  export JIRA_PROJECT_ID=your_project_id e.g. 106413
-  export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
-  export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
-  diqu alert --to jira
-  ```
+    ```bash
+    export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
+    export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
+    export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
+    export JIRA_PROJECT_ID=your_project_id e.g. 106413
+    export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
+    export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
+    ```
+    ```bash
+    diqu alert --to jira
+    ```
 
-> For more details, please help to visit [the documentation site](https://diqu.iflambda.com/latest/).
+> For more details, please visit [the documentation site](https://diqu.iflambda.com/latest/).
 
 ## How to Contribute
 
-This (`diqu`) tool is an open source software. Whether you are a seasoned open source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
+This Auto Alert (`diqu`) tool is an open-source software. Whether you are a seasoned open-source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
 
-👉 See [CONTRIBUTING guideline](https://diqu.iflambda.com/latest/nav/dev/contributing.html) for more details, or alternatively check [CONTRIBUTING.md](./CONTRIBUTING.md)
+👉 See [CONTRIBUTING guideline](https://diqu.iflambda.com/latest/nav/dev/contributing.html) for more details or check out [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-👉 And then, super thanks to **our beloved Contributors**:
+👉 And then, kudos to **our beloved Contributors**:
 
 <a href="https://github.com/infinitelambda/diqu/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=infinitelambda/diqu" />
@@ -106,11 +134,14 @@ We are an Elite Snowflake Partner, a Platinum dbt Partner and two-times Fivetran
 
 Naturally, we love exploring innovative solutions and sharing knowledge, so go ahead and:
 
-🔧 Take a look around our [Git](https://github.com/infinitelambda) </br>
+🔧 Take a look around our [Git](https://github.com/infinitelambda)
+
 ✏️ Browse our [tech blog](https://infinitelambda.com/category/tech-blog/)
 
-We are also chatty, so:</br>
-#️⃣ Follow us on [LinkedIn](https://www.linkedin.com/company/infinite-lambda/) </br>
+We are also chatty, so:
+
+👀 Follow us on [LinkedIn](https://www.linkedin.com/company/infinite-lambda/)
+
 👋🏼 Or just [get in touch](https://infinitelambda.com/contacts/)
 
 [<img src="https://raw.githubusercontent.com/infinitelambda/cdn/1.0.0/general/images/GitHub-About-Section-1080x1080.png" alt="About IL" width="500">](https://infinitelambda.com/)

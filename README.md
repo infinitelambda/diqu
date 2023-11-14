@@ -55,7 +55,7 @@ diqu alert --to slack --to jira
 04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
 04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
 04:33:19  diqu: INFO - Using snowflake connection
-04:33:19  diqu: INFO - Looking for the query in: /path/to/site-packages/diqu/packages/include/dq_tools__get_test_results.sql
+04:33:19  diqu: INFO - Looking for the query in: ./dq_tools__get_test_results.sql
 04:33:23  diqu: INFO - Alerting to: SLACK
 04:33:23  diqu: INFO - ✅ Done > Slack
 04:33:23  diqu: INFO - Alerting to: JIRA

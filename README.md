@@ -7,7 +7,11 @@
 [![python](https://img.shields.io/badge/Python-3.9|3.10|3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![codecov](https://codecov.io/gh/infinitelambda/diqu/graph/badge.svg?token=JUO2ASNQEB)](https://codecov.io/gh/infinitelambda/diqu)
 
-Automate and streamline the notification process for dbt test results using this versatile CLI companion tool. Receive detailed alerts seamlessly on various platforms, promoting improved collaboration on dbt project issues 🐞🚀.
+Automate and streamline the alerting/ notification process for dbt test results using this versatile CLI companion tool. Receive detailed alerts & test metadata seamlessly on various platforms, promoting improved collaboration on dbt project issues 🐞🚀.
+
+## Who is this for
+
+This tool is designed for individuals or teams seeking to automate the management of their dbt project issues (test warnings, errors... etc) outside the dbt environment.
 
 ## Features
 
@@ -28,7 +32,8 @@ Automate and streamline the notification process for dbt test results using this
 - Slack
 - CSV
 
-### Supported [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) metadata
+### Supported dq-tools metadata
+
 
 - Latest & historical tests' statuses, timestamps, row failed counts, row scanned counts and failed rate.
 - `deprecated` status for tests that are not executed and recorded in x days.

@@ -42,20 +42,23 @@ By default, it is `False`, therefore let's enable it to have data flew in.
 
 ```bash
 # init the dq-tools' models
-dbt run -s dq_tools 
+dbt run -s dq_tools
 # build your dbt models with saving the test results
 dbt build --vars '{dq_tools_enable_store_test_results: true}'
 ```
 
 ## 4. Alerting
 
-See [JIRA Configuration](https://diqu.iflambda.com/latest/nav/guide/config/alerts/jira.html) for more details, following is a sample command:
+Check out the modules' configuration for specific env vars setup. Example:
+
+- [JIRA Configuration](https://diqu.iflambda.com/latest/nav/guide/config/alerts/jira.html)
+- [SLACK Configuration](https://diqu.iflambda.com/latest/nav/guide/config/alerts/slack.html)
 
 ```bash
-# prepare the env vars here first
+# prepare the env vars first
 ...
 # run alerting
 diqu alert --query-schema AUDIT
 ```
 
-> We need to use `--query-schema` here because we previously configure the `dbt_dq_tool_schema` variable
+> `--query-schema` is required here because we previously configured the `dbt_dq_tool_schema` variable

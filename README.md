@@ -9,28 +9,32 @@
 
 Automate and streamline the notification process for dbt test results using this versatile CLI companion tool. Receive detailed alerts seamlessly on various platforms, promoting improved collaboration on dbt project issues 🐞🚀.
 
-Features
+## Features
+
 - Automated alerts and notifications based on recorded dbt test results.
 - Built-in support for dq-tools and custom query input.
 - Auto-labels `deprecated` tests for quick & easy identification.
-- Sends compact and succinct messages to a dedicated Slack channel.
+- Sends succinct and informative messages to a dedicated Slack channel.
 - Creates and updates Jira tickets with the latest tests' metadata.
 
-Supported input modules (dbt test results):
+### Supported input modules (dbt test results):
+
 - [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
 - Custom query
 
-Supported output modules (alert/ notification):
-- CSV
+### Supported output modules (alert/ notification):
+
 - Jira
 - Slack
+- CSV
 
-Supported [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) metadata:
-- Latest & historical tests' statuses, timestamps, row failed counts, row scanned counts, and failed rate.
+### Supported [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) metadata
+
+- Latest & historical tests' statuses, timestamps, row failed counts, row scanned counts and failed rate.
 - `deprecated` status for tests that are not executed and recorded in x days.
 - Tests labels (dq_issue_type, kpi_category)
 
-> dbt alert rant 🟢 🟡 🔴 ⚫ </br>
+> dbt alert rant 🟢 🟡 🔴 ⚫ - by `diqu` OG Contributors </br>
 >_Run errors are red,_</br>
 >_Test warnings are yellow,_</br>
 >_Where's my bug alert,_</br>
@@ -45,7 +49,7 @@ pip install diqu [--upgrade]
 ```
 
 📓 _NOTE_: The Data Warehouse (DWH) module should already be installed if you are using `diqu` in a working dbt project. If not, please perform additional steps to install these DWH modules.
-For example, if you're using snowflake:
+For example, if you're using Snowflake:
 
 ```bash
 pip install "snowflake-connector-python[pandas]"

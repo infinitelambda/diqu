@@ -90,7 +90,7 @@ In particular to the alert module, here are the additional configurations:
 
 This (`diqu`) tool is an open source software. Whether you are a seasoned open source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
 
-👉 See [CONTRIBUTING guideline](./nav/dev/contributing.html) for more details, or alternatively check [CONTRIBUTING.md](./CONTRIBUTING.md)
+👉 See [CONTRIBUTING guideline](https://diqu.iflambda.com/latest/nav/dev/contributing.html) for more details, or alternatively check [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 👉 And then, super thanks to **our beloved Contributors**:
 

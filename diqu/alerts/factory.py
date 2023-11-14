@@ -27,7 +27,7 @@ class AlertFactory:
         """Run the alert to the (multiple) channel(s)
 
         Args:
-            data (DataFrame): Incident data collected
+            data (DataFrame): Issue data collected
         """
         for c in self.channels:
             logger.info(f"Alerting to: {str(c.__name__).split('.')[-1].upper()}")

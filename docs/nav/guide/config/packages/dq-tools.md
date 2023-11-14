@@ -1,6 +1,6 @@
 # Configuration for `dq-tools` dbt package
 
-This is the essential steps to start alerting the Incidents based on the test results which are captured by [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) package in a [dbt](https://www.getdbt.com/) project.
+This is the essential steps to start alerting the Issues based on the test results which are captured by [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) package in a [dbt](https://www.getdbt.com/) project.
 
 ## 1. Install `dq-tools` package
 

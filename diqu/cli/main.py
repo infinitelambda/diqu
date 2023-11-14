@@ -23,5 +23,5 @@ def diqu(ctx, **kwargs):
 @common.options
 @common.preflight
 def alert(ctx, **kwargs):
-    """Alert the incidents"""
+    """Alert the issues"""
     exit(AlertTask(**kwargs).run())

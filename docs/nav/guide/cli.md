@@ -14,7 +14,7 @@ Options:<br />
 --help, -h Show this message and exit.<br />
 <br />
 Commands:<br />
-alert Alert the incidents<br />
+alert Alert the issues<br />
 <br />
  Specify one of these sub-commands and you can find more help from there.
     </span>
@@ -22,7 +22,7 @@ alert Alert the incidents<br />
 
 ## diqu alert
 
-Alert the incidents to JIRA Board
+Alert the issues to JIRA Board
 
 **Examples:**
 === "CLI (within dbt project)"
@@ -76,7 +76,7 @@ For example, you'd have a query built in `myquery.sql` file which is located at 
 
 For example, the `dbt_project.yml` is as below:
 
-```yaml  
+```yaml
 name: 'my_awesome_dbt'
 version: '1.0.0'
 config-version: 2

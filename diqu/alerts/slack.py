@@ -35,17 +35,17 @@ def alert(data, limit: int = 3) -> ResultCode:
             error_count=data[data["TEST_STATUS"] == "failed"].shape[0],
             warn_count=data[data["TEST_STATUS"] == "warn"].shape[0],
             pass_count=data[data["TEST_STATUS"] == "pass"].shape[0],
-            deperecated_count=data[data["TEST_STATUS"] == "deprecated"].shape[0],
+            deperecated_count=data[data["TEST_STATUS"] == "deprecate"].shape[0],
         )
         if not data.empty
         else "(No Data)"
     )
-
     incident_data = (
-        data[(data["TEST_STATUS"] != "pass") & (data["TEST_STATUS"] != "deprecated")]
+        data[(data["TEST_STATUS"] != "pass") & (data["TEST_STATUS"] != "deprecate")]
         .sort_values("PRIORITY", ascending=True)
         .head(limit)
     )
+
     if incident_data.empty:
         logger.info("✅ Empty Data | No Alert required > Slack")
         return ResultCode.SUCCEEDED

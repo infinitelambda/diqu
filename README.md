@@ -1,18 +1,21 @@
-# diqu [Experimental]
+# diqu
 
+[![Documentation](https://img.shields.io/badge/Documentation-Check%20it%20out%20📖-blue?style=flat)](https://diqu.iflambda.com/latest/)
 [![PyPI version](https://badge.fury.io/py/diqu.svg)](https://pypi.org/project/diqu/)
-![python-cli](https://img.shields.io/badge/CLI-Python-FFCE3E?labelColor=14354C&logo=python&logoColor=white)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache--2.0-yellow.svg)](https://opensource.org/license/apache-2-0/)
+![python-cli](https://img.shields.io/badge/CLI-Python-FFCE3E?labelColor=14354C&logo=python&logoColor=white)
 [![python](https://img.shields.io/badge/Python-3.9|3.10|3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![codecov](https://codecov.io/gh/infinitelambda/diqu/graph/badge.svg?token=JUO2ASNQEB)](https://codecov.io/gh/infinitelambda/diqu)
 
-CLI companion tool supporting the Alert / Notification for [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) and more.
+CLI Companion Tool with built-in Alert / Notification features for [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools) and maybe more with empowering bug management with streamlined collaboration, agility, and automated anomaly alerts for a more efficient bug-fighting experience 🐞🚀.
 
-- [diqu \[Experimental\]](#diqu-experimental)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [How to Contribute](#how-to-contribute)
-  - [About Infinite Lambda](#about-infinite-lambda)
+> 🔴 🟡 ⚫ ✅ </br>
+>_In the realm where circuits hum and wires entwine,_</br>
+>_A bug’s life, oh, how it’s truly divine._</br>
+>_In the world of engineering, where chaos thrives,_</br>
+>_Auto Alert, our savior, arrives._
+
+<img src="./docs/assets/img/diqu_concept.jpeg" alt="diqu Concept"> <!-- markdownlint-disable no-inline-html -->
 
 ## Installation
 
@@ -20,7 +23,7 @@ CLI companion tool supporting the Alert / Notification for [![dq-tools](https://
 pip install diqu [--upgrade]
 ```
 
-📓 NOTE: The DWH module should get installed already if you use `diqu` in a dbt project, if not, please perform additional step, for example, to install snowflake module:
+📓 The DWH module should be available already if you use `diqu` CLI in a `dbt` project, if not, please perform additional installation, for example, snowflake module:
 
 ```bash
 pip install "snowflake-connector-python[pandas]"
@@ -29,29 +32,35 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
 ## Usage
 
-```bash
-dbt run -s dq_tools
-diqu alert \
-  --project-dir /path/to/dbt/project \
-  --to slack --to jira
-```
-
 <details> <!-- markdownlint-disable no-inline-html -->
-  <summary>Sample logs</summary>
+  <summary>preflight</summary>
 
-  ```log
-  04:33:17  diqu: INFO - Run with diqu==1.0.0 🏃
-  04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
-  04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
-  04:33:19  diqu: INFO - Using snowflake connection
-  04:33:19  diqu: INFO - Looking for the query in: /path/to/site-packages/diqu/packages/include/dq_tools__get_test_results.sql
-  04:33:23  diqu: INFO - Alerting to: SLACK
-  04:33:23  diqu: INFO - ✅ Done > Slack
-  04:33:23  diqu: INFO - Alerting to: JIRA
-  04:33:23  diqu: INFO - ✅ Done > JIRA
+  ```bash
+  # define the query params
+  export ISSUE_DEPRECATED_WINDOW_IN_DAYS=your_issue_deprecation_time_in_day, default to "3"
+  export ISSUE_UPDATE_WINDOW_IN_DAYS=your_issue_historical_data_update_window_in_days, default to "14"
+
+  # build dq-tools log table
+  dbt run -s dq_tools
   ```
 
 </details>
+
+```bash
+diqu alert --to slack --to jira
+```
+
+```log
+04:33:17  diqu: INFO - Run with diqu==1.0.0 🏃
+04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
+04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
+04:33:19  diqu: INFO - Using snowflake connection
+04:33:19  diqu: INFO - Looking for the query in: ./dq_tools__get_test_results.sql
+04:33:23  diqu: INFO - Alerting to: SLACK
+04:33:23  diqu: INFO - ✅ Done > Slack
+04:33:23  diqu: INFO - Alerting to: JIRA
+04:33:23  diqu: INFO - ✅ Done > JIRA
+```
 
 In particular to the alert module, here are the additional configurations:
 
@@ -72,14 +81,22 @@ In particular to the alert module, here are the additional configurations:
   export JIRA_PROJECT_ID=your_project_id e.g. 106413
   export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
   export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
-  export ISSUE_DEPRECATED_WINDOW_IN_DAYS=your_issue_deprecation_time_in_day, default to "3"
-  export ISSUE_UPDATE_WINDOW_IN_DAYS=your_issue_historical_data_update_window_in_days, default to "14"
   diqu alert --to jira
   ```
 
+> For more details, please help to visit [the documentation site](https://diqu.iflambda.com/latest/).
+
 ## How to Contribute
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+This (`diqu`) tool is an open source software. Whether you are a seasoned open source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
+
+👉 See [CONTRIBUTING guideline](https://diqu.iflambda.com/latest/nav/dev/contributing.html) for more details, or alternatively check [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+👉 And then, super thanks to **our beloved Contributors**:
+
+<a href="https://github.com/infinitelambda/diqu/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=infinitelambda/diqu" />
+</a>
 
 ## About Infinite Lambda
 

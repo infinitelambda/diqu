@@ -1,11 +1,14 @@
 [tool.poetry]
 name = "diqu"
 version = "0.0.0"
-description = "CLI companion tool to support dq-tools package and more"
-authors = ["IL <dat@infinitelambda.com>"]
+description = "Data Quality CLI for the Auto-Alerts"
+authors = ["Infinite Lambda <contact@infinitelambda.com>"]
 readme = "README.md"
+license = "Apache-2.0"
 repository = "https://github.com/infinitelambda/diqu"
-keywords = ["flake8", "markdown", "lint"]
+homepage = "https://infinitelambda.com"
+documentation = "https://diqu.iflambda.com/latest/"
+keywords = ["packaging", "poetry", "data-quality", "alert", "notification", "collaboration", "agility", "flake8", "markdown", "lint"]
 classifiers = [
     "Environment :: Console",
     "Operating System :: OS Independent",
@@ -24,11 +27,11 @@ diqu = "diqu.__entrypoint__:main"
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
 rich-click = "^1.7.0"
-jira = "^3.5.2"
 pyyaml = "^6.0.1"
-slack-sdk = "^3.23.0"
 pandas = ">=1.0,<2.1"
 snowplow-tracker = "^1.0.1"
+jira = "^3.5.2"
+slack-sdk = "^3.23.0"
 
 [tool.poetry.dev-dependencies]
 snowflake-connector-python = {version = "^3.3.1", extras = ["secure-local-storage", "pandas"]}

@@ -62,3 +62,9 @@ diqu alert --query-schema AUDIT
 ```
 
 > `--query-schema` is required here because we previously configured the `dbt_dq_tool_schema` variable
+
+## 5. Supported dq-tools metadata
+
+- Latest & historical tests' statuses, timestamps, row failed counts, row scanned counts and failed rate.
+- `deprecated` status for tests that are not executed and recorded in x days.
+- Tests labels (dq_issue_type, kpi_category)

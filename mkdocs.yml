@@ -14,13 +14,13 @@ nav:
     - Quick Start: index.md
     - User Guide:
       - General: nav/guide/common.md
-      - Alerting Configuration:
+      - Alert Modules Configuration:
         - Slack: nav/guide/config/alerts/slack.md
         - JIRA: nav/guide/config/alerts/jira.md
-      - Data Sources Configuration:
+      - Sources Modules Configuration:
         - Snowflake: nav/guide/config/sources/snowflake.md
         - Custom via CSV file: nav/guide/config/sources/custom.md
-      - Packages Configuration:
+      - Packages Module Configuration:
         - DQ Tools: nav/guide/config/packages/dq-tools.md
         - Custom query: nav/guide/config/packages/custom.md
       - Anonymous usage stats: nav/guide/config/usage_stats.md

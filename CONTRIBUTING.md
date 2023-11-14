@@ -1,6 +1,6 @@
 # Contributing to `diqu`
 
-`diqu` is open source software. Whether you are a seasoned open source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
+`diqu` is open-source software. Whether you are a seasoned open-source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
 
 - [Contributing to `diqu`](#contributing-to-diqu)
   - [About this document](#about-this-document)

@@ -2,11 +2,12 @@
 
 `diqu` is open-source software. Whether you are a seasoned open-source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
 
+- [Contributing to `diqu`](#contributing-to-diqu)
   - [About this document](#about-this-document)
   - [Getting the code](#getting-the-code)
     - [Installing git](#installing-git)
     - [External contributors](#external-contributors)
-  - [Setting up an environment](#setting-up-an-environment)
+  - [Setting up your dev environment](#setting-up-your-dev-environment)
     - [Tools](#tools)
   - [Testing](#testing)
     - [`pytest`](#pytest)
@@ -38,13 +39,14 @@ You can contribute to `diqu` by forking the `diqu` repository. For a detailed ov
 5. Open a pull request against `infintelambda/diqu` from your forked repository
 
 ## Setting up your dev environment
+
 Here are some helpful tools for local development. While this list is tailored for `diqu` development, many of these tools are used commonly across open-source Python projects.
 
 ### Tools
 
 We will use `poetry` in `diqu` development and testing.
 
-So first install poetry via pip:
+So first install poetry via pip or via the [official installer](https://python-poetry.org/docs/#installing-with-the-official-installer):
 
 ```bash
 python3 -m pip install poetry --upgrade

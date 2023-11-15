@@ -1,3 +1,4 @@
+ <!-- markdownlint-disable ul-indent -->
 # Configuration for Jira module
 
 This module creates new Jira issues and/or updates current issues based on your input test results.
@@ -11,14 +12,16 @@ Besides basic credentials such as `JIRA_SERVER`, `JIRA_AUTH_USER`, `JIRA_AUTH_PA
 - Only 1 `Done` status under the `Done` status category. We are using `Done` as a filter for open issues, so something like `Archived` under `Done` category would mess up the update logic.
 - A dedicated `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY`. This is the issue summary suffix to identify issues that we should manage using the module with other issues from the same Jira project. Defaults to "dq-tools"
 
-## Jira module config variables & CLI commands:
+## Jira module config variables & CLI commands
 
-- `JIRA_SERVER` = your_jira_server (e.g. https://your_value.atlassian.net/)
-- `JIRA_AUTH_USER` = your_service_account (e.g. dqt_user@your_value.com)
-- `JIRA_AUTH_PASSWORD` = your_service_token (e.g. ATATTxxxxx)
-- `JIRA_PROJECT_ID` = your_project_id (e.g. 123456)
-- `JIRA_ISSUE_TYPE` = your_issue_type (default to "Bug")
-- `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY` = our_issue_filter_on_title (default to "dq-tools")
+| Field                                | Description                                                                      |
+|--------------------------------------|----------------------------------------------------------------------------------|
+| `JIRA_SERVER`                        | Your Jira server (e.g., `https://your_value.atlassian.net/`)                     |
+| `JIRA_AUTH_USER`                     | Your Jira service account (e.g., `user@your_value.com`)                          |
+| `JIRA_AUTH_PASSWORD`                 | Your Jira service token (e.g., `ATATTxxxxx`)                                     |
+| `JIRA_PROJECT_ID`                    | Your Jira project ID (e.g., `123456`)                                            |
+| `JIRA_ISSUE_TYPE`                    | Your Jira issue type (default to "Bug")                                          |
+| `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY` | Your Jira filter on issue title (default to "dq-tools")                          |
 
 All Jira configs are currently environment variables, you can set them up using the sample code below:
 
@@ -38,6 +41,7 @@ diqu alert --to jira
 ```
 
 ## Issue summary (title)
+
 The issue's summary (aka issue's title) consists of the following parts:
 > Status of the latest execution + test_id(hash) + issue filter
 
@@ -47,6 +51,7 @@ Example: `🟡 | Warning in test: accepted_values_my_first_dbt_model_id__False__
 > On the other hand, generic test IDs change if we modify their contents, so the module will in turn create a new issue instead.
 
 ## The relationship between Jira issue and the DBT test
+
 A Jira issue (aka a Jira ticket - defined by `issue_key`) corresponding to 01 dbt test (defined by `test_id`).
 
 Even though there might be multiple executions of 1 test in our test_results table, all of these executions' metadata are displayed in the same Jira issue if the issue is still in the `open` state (issue' status != `Done`)
@@ -70,10 +75,11 @@ The reason is the fluctuations in some test results. We have experienced cases w
 Therefore, until there's a unified approach to this problem, marking Done each Jira issue should be done manually after a thorough assessment of previous statuses.
 
 ## Test metadata in Jira issue
+
 Below is the list of test metadata displayed in a Jira issue, and the corresponding issue's component [ `Summary`, `Description`, `Labels` ]  that they are in:
 
 - Test metadata:
-    - Test ID [ `Summary` & `Description` ]
+    - Test ID [ `Summary` & `Description` ] 
     - Test tags [ `Labels` ]
 - Latest execution metadata [ `Description` ]
     - Latest Status: warn
@@ -88,15 +94,22 @@ Below is the list of test metadata displayed in a Jira issue, and the correspond
 ### Issue description sample
 
 A sample issue description is as follows:
->- Test ID: — "MY_FIRST_DBT_MODEL"|id|||test.diqu_dev.accepted_values_my_first_dbt_model_id_False1_2.ee252c12b8 —
->- Latest Status: warn
->- Latest Run Timestamp: 2023-11-14 09:29:42.456000 (UTC)
->- Latest Run Failed Rate: 0.25
->- Previous statuses: ["🟢", "🟢", "🟡", "🟡", "🟡"]
->- Previous run timestamps (UTC): [ "2023-11-07 11:04:10.762", "2023-11-07 10:58:31.607", "2023-11-07 10:52:53.111", "2023-11-07 10:51:24.584", "2023-11-07 10:15:31.166"]
->- Previous # of failed records: [ 1, 1, 1, 1, 1]
->- Previous # of scanned records: [ 4, 4, 4, 4, 4]
->- tag 1: accepted values
->- tag 2: Accuracy
->
->Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
+
+```log
+• Test ID: — MY_FIRST_DBT_MODEL|id|||test.diqu_dev.accepted_values_my_first_dbt_model_id_False1_2.ee252c12b8 —
+• Latest Status: warn
+• Latest Run Timestamp: 2023-11-14 09:29:42.456000 (UTC)
+• Latest Run Failed Rate: 0.25
+• Previous statuses: ["🟢", "🟢", "🟡", "🟡", "🟡"]
+• Previous run timestamps (UTC): [ "2023-11-07 11:04:10.762", "2023-11-07 10:58:31.607", "2023-11-07 10:52:53.111", "2023-11-07 10:51:24.584", "2023-11-07 10:15:31.166"]
+• Previous # of failed records: [ 1, 1, 1, 1, 1]
+• Previous # of scanned records: [ 4, 4, 4, 4, 4]
+• tag 1: accepted values
+• tag 2: Accuracy
+
+Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
+```
+
+And the example of JIRA issues:
+
+<img src="../../../../assets/img/diqu-alert--jira.png" alt="diqu jira"> <!-- markdownlint-disable no-inline-html -->

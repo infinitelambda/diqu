@@ -6,23 +6,36 @@ This module creates new Jira issues and/or updates current issues based on your 
 
 Besides basic credentials such as `JIRA_SERVER`, `JIRA_AUTH_USER`, `JIRA_AUTH_PASSWORD` and `JIRA_PROJECT_ID` as specified in the next section, your Jira Project will also need the following:
 
-- A dedicated issue type for our tool, defined by `JIRA_ISSUE_TYPE`, defaults to "Bug".
+- A dedicated issue type for our tool, defined by `JIRA_ISSUE_TYPE`, defaults to "Bug" 🐛.
 - This issue type must have its `Labels` field [enabled](https://support.atlassian.com/jira-service-management-cloud/docs/add-fields-to-a-screen/).
 - Only 1 `Done` status under the `Done` status category. We are using `Done` as a filter for open issues, so something like `Archived` under `Done` category would mess up the update logic.
 - A dedicated `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY`. This is the issue summary suffix to identify issues that we should manage using the module with other issues from the same Jira project. Defaults to "dq-tools"
 
-## Jira module config variables:
+## Jira module config variables & CLI commands:
+
+- `JIRA_SERVER` = your_jira_server (e.g. https://your_value.atlassian.net/)
+- `JIRA_AUTH_USER` = your_service_account (e.g. dqt_user@your_value.com)
+- `JIRA_AUTH_PASSWORD` = your_service_token (e.g. ATATTxxxxx)
+- `JIRA_PROJECT_ID` = your_project_id (e.g. 123456)
+- `JIRA_ISSUE_TYPE` = your_issue_type (default to "Bug")
+- `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY` = our_issue_filter_on_title (default to "dq-tools")
 
 All Jira configs are currently environment variables, you can set them up using the sample code below:
 
-    ```bash
-    export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
-    export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
-    export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
-    export JIRA_PROJECT_ID=your_project_id e.g. 106413
-    export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
-    export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
-    ```
+```bash
+export JIRA_SERVER=https://your_value.atlassian.net/
+export JIRA_AUTH_USER=dqt_user@your_value.com
+export JIRA_AUTH_PASSWORD=ATATTxxxxx
+export JIRA_PROJECT_ID=123456
+export JIRA_ISSUE_TYPE=Bug
+export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=dq-tools
+```
+
+To trigger Jira's actions (create and/or update issues), use the following:
+
+```bash
+diqu alert --to jira
+```
 
 ## Issue summary (title)
 The issue's summary (aka issue's title) consists of the following parts:
@@ -33,10 +46,10 @@ Example: `🟡 | Warning in test: accepted_values_my_first_dbt_model_id__False__
 > Note that dbt singular tests don't have a hash suffix, only test names. Hence, if we change the content of a singular test, their test IDs stay the same and the following statuses will still be updated in the same Jira issue.
 > On the other hand, generic test IDs change if we modify their contents, so the module will in turn create a new issue instead.
 
-## The relationship between Jira issue & dbt test
+## The relationship between Jira issue and the DBT test
 A Jira issue (aka a Jira ticket - defined by `issue_key`) corresponding to 01 dbt test (defined by `test_id`).
 
-Even though there might be multiple executions of 1 test in our test_results table, all of these executions' metadata are displayed in the same Jira issue if the issue is still in `open` state (issue' status != `Done`)
+Even though there might be multiple executions of 1 test in our test_results table, all of these executions' metadata are displayed in the same Jira issue if the issue is still in the `open` state (issue' status != `Done`)
 
 In the case where our `test_id` latest status is not `pass`, and the previous corresponding issue has been marked `Done`, the module will **create** a new issue instead of **updating** the previous one.
 
@@ -48,10 +61,12 @@ In short:
 - A current issue is updated when:
     - There is a corresponding `issue_key` that is not marked `Done`
 
-## Automatically mark a Jira Issue as `Done`
+## Automatically mark a Jira Issue as `Done` ✅
 
-Even though it seems very straightforward, we don't automate the process of marking issues as Done as soon as there's a `pass` in the latest test results.
+Even though it seems very straightforward, we don't automate the process of marking issues as Done as soon as there's a `pass` status.
+
 The reason is the fluctuations in some test results. We have experienced cases where tests passed and failed randomly in each ETL run, which makes the `Done` status for those issues incorrect (our tool might create a new issue in the next run).
+
 Therefore, until there's a unified approach to this problem, marking Done each Jira issue should be done manually after a thorough assessment of previous statuses.
 
 ## Test metadata in Jira issue

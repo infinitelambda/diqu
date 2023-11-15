@@ -23,13 +23,13 @@ Generally, `diqu` executes the following steps:
 
 Besides the basic dbt test statuses (`pass`, `warn`, `error`), in the built-in query for `dq-tools`, we introduced the new status of `deprecate`.
 
-`deprecate` means no longer valid, and we don't need to take immediate action.
+`deprecate` means no longer valid, and we don't need to take immediate action (erm ... hooray 🙌?).
 
 A test is marked `deprecate` if it's not executed & recorded in a specified number of days.
 
 This can defined by the `ISSUE_DEPRECATED_WINDOW_IN_DAYS` variable (see [Query Variables Config](./config/packages/query_variables.html))
 
-Our built-in query also labels each status with its corresponding "traffic lights" icon for easier identification.
+Our built-in query also labels each status with its corresponding "traffic lights" 🚥 icon for easier identification (who doesn't love colorful icons in their alerts? 🎉)
 
 - `pass`(🟢)
 - `warn`(🟡)

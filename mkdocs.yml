@@ -10,7 +10,7 @@ edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2023 Infinite Lambda
 
 nav:
-  - diqu:
+  - diqu - What is it?:
     - What is it?: index.md
     - Quick Start: nav/guide/quick_start.md
     - User Guide:

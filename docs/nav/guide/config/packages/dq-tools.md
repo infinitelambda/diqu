@@ -16,7 +16,7 @@ packages:
 
 Run `dbt deps` to install the package.
 
-For more information on using packages in your dbt project, check out the [dbt Documentation](https://docs.getdbt.com/docs/build/packages).
+📖 For more information on using packages in your dbt project, check out the [dbt Documentation](https://docs.getdbt.com/docs/build/packages).
 
 ## 2. Configure the log table & the hook
 

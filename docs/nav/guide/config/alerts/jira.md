@@ -13,12 +13,14 @@ Besides basic credentials such as `JIRA_SERVER`, `JIRA_AUTH_USER`, `JIRA_AUTH_PA
 
 ## Jira module config variables & CLI commands
 
-- `JIRA_SERVER` = your_jira_server (e.g. `https://your_value.atlassian.net/`)
-- `JIRA_AUTH_USER` = your_service_account (e.g. `user@your_value.com`)
-- `JIRA_AUTH_PASSWORD` = your_service_token (e.g. ATATTxxxxx)
-- `JIRA_PROJECT_ID` = your_project_id (e.g. 123456)
-- `JIRA_ISSUE_TYPE` = your_issue_type (default to "Bug")
-- `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY` = our_issue_filter_on_title (default to "dq-tools")
+| Field                                | Description                                                                      |
+|--------------------------------------|----------------------------------------------------------------------------------|
+| `JIRA_SERVER`                        | Your Jira server (e.g., `https://your_value.atlassian.net/`)                     |
+| `JIRA_AUTH_USER`                     | Your Jira service account (e.g., `user@your_value.com`)                          |
+| `JIRA_AUTH_PASSWORD`                 | Your Jira service token (e.g., `ATATTxxxxx`)                                     |
+| `JIRA_PROJECT_ID`                    | Your Jira project ID (e.g., `123456`)                                            |
+| `JIRA_ISSUE_TYPE`                    | Your Jira issue type (default to "Bug")                                          |
+| `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY` | Your Jira filter on issue title (default to "dq-tools")                          |
 
 All Jira configs are currently environment variables, you can set them up using the sample code below:
 
@@ -105,4 +107,4 @@ A sample issue description is as follows:
 >
 > Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
 
-![Alt text](/assets/img/diqu-alert--jira.png)
+<img src="assets/img/diqu-alert--jira.png" alt="diqu jira"> <!-- markdownlint-disable no-inline-html -->

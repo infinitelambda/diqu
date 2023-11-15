@@ -116,7 +116,7 @@ pip install "snowflake-connector-python[secure-local-storage]"
     diqu alert --to jira
     ```
 
-> For more details, please visit [the documentation site](https://diqu.iflambda.com/latest/).
+📖 For more details, please visit [the documentation site](https://diqu.iflambda.com/latest/).
 
 ## How to Contribute
 

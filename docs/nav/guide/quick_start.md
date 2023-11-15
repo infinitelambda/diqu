@@ -92,7 +92,7 @@ Here is the sample logs:
 04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
 04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
 04:33:19  diqu: INFO - Using snowflake connection
-04:33:19  diqu: INFO - Looking for the query in: ./dq_tools__get_test_results.sql
+04:33:19  diqu: INFO - Looking for the query in: ./query.sql
 04:33:23  diqu: INFO - Alerting to: SLACK
 04:33:23  diqu: INFO - ✅ Done > Slack
 04:33:23  diqu: INFO - Alerting to: JIRA
@@ -101,9 +101,7 @@ Here is the sample logs:
 
 Before we can run the Alerting, surely we need to configure the Alert credentials:
 
-### Alert Modules Configurations
-
-#### Slack
+### Slack Channel
 
 Use the environment variables to configure the Slack Channel:
 
@@ -137,4 +135,4 @@ Then, go alert:
 diqu alert --to jira
 ```
 
-> For more details, please jump to the [User Guide](./nav/guide/common.html) page.
+📖 For more details, please jump to the [User Guide](./nav/guide/common.html) page.

@@ -24,17 +24,22 @@ This tool is designed for individuals or teams seeking to automate the managemen
 
 ### Supported Modules
 
-- Sources (DWH connections)
-  - Snowflake
-  - CSV file
-- Package (parsing dbt test results)
-  - [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
-  - Custom query
-- Alert Modules (alert/ notification)
-  - Jira
-  - Slack
+#### Sources (DWH connections)
 
-## Concept
+- Snowflake
+- CSV file
+
+#### Packages (parsing dbt test results)
+
+- [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
+- Custom query
+
+#### Alert Modules (alert/ notification)
+
+- Jira
+- Slack
+
+## Concept ⭐
 
 !!! quote "dbt alert rant 🟢 🟡 🔴 ⚫ - by `diqu` OG Contributors"
     _Run errors are red,_
@@ -64,14 +69,14 @@ diqu alert --to slack --to jira
 04:33:19  diqu: INFO - Using dbt project at: /path/to/dbt/project
 04:33:19  diqu: INFO - Using dbt profiles.yml at: ~/.dbt
 04:33:19  diqu: INFO - Using snowflake connection
-04:33:19  diqu: INFO - Looking for the query in: ./dq_tools__get_test_results.sql
+04:33:19  diqu: INFO - Looking for the query in: ./query.sql
 04:33:23  diqu: INFO - Alerting to: SLACK
 04:33:23  diqu: INFO - ✅ Done > Slack
 04:33:23  diqu: INFO - Alerting to: JIRA
 04:33:23  diqu: INFO - ✅ Done > JIRA
 ```
 
-> For more details, please jump to [the User Guide page](./nav/guide/common.html) or the [Quick Start](./nav/guide/quick_start.html) page.
+📖 For more details, please jump to [the User Guide page](./nav/guide/common.html) or the [Quick Start](./nav/guide/quick_start.html) page.
 
 ## How to Contribute
 

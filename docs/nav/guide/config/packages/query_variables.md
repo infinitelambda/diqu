@@ -12,7 +12,8 @@ For example, with the built-in `dq-tools` Package Module, we are using the follo
 See [`dq_tools__get_test_results.sql`](https://github.com/infinitelambda/diqu/blob/main/diqu/packages/include/dq_tools__get_test_results.sql) in the code base for details.
 
 To configure these environment variables, use the following:
-  ```bash
-  export ISSUE_DEPRECATED_WINDOW_IN_DAYS=3
-  export ISSUE_UPDATE_WINDOW_IN_DAYS=14
-  ```
+
+```bash
+export ISSUE_DEPRECATED_WINDOW_IN_DAYS=3
+export ISSUE_UPDATE_WINDOW_IN_DAYS=14
+```

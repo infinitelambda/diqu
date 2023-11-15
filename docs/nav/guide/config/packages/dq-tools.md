@@ -19,6 +19,7 @@ Run `dbt deps` to install the package.
 For more information on using packages in your dbt project, check out the [dbt Documentation](https://docs.getdbt.com/docs/build/packages).
 
 ## 2. Configure the log table & the hook
+
 The log table contains all the test results produced by dbt Jobs and can be configured by specifying the database or/and the schema.
 By default, this info will be getting from the dbt `profiles.yml`.
 The hook is to save the test result if any.
@@ -57,6 +58,7 @@ Set up Alert Module variables:
 - [SLACK Configuration](https://diqu.iflambda.com/latest/nav/guide/config/alerts/slack.html)
 
 ### Executing alert actions
+
 ```bash
 # prepare the env vars first
 ...

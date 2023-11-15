@@ -1,6 +1,7 @@
 # User Guide
 
 ## Modules
+
 `diqu` CLI is built in the modular approach with 3 main ones:
 
 1. **Source Modules**: Build **_Data Source connections_** (e.g. [Snowflake](./config/sources/snowflake.html), [csv file](./config/sources/custom_csv.html))
@@ -10,6 +11,7 @@
 👉 _See the next pages for more information on how to configure the modules_
 
 ## How it works
+
 Generally, `diqu` executes the following steps:
 
 1. Takes in dbt test results from your **Source Module** of choice, let refer to this as the `test_results` table.
@@ -36,4 +38,4 @@ Our built-in query also labels each status with its corresponding "traffic light
 - `failed`(🔴)
 - `deprecate`(⚫)
 
->The statuses of each executed dbt test are crucial for issue management, hence **it is highly recommended to include in your custom CSV or custom Query** if you're building one yourself.
+> The statuses of each executed dbt test are crucial for issue management, hence **it is highly recommended to include in your custom CSV or custom Query** if you're building one yourself.

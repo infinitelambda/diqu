@@ -18,30 +18,29 @@ This tool is designed for individuals or teams seeking to automate the managemen
 - Automated alerts and notifications based on recorded dbt test results.
 - Built-in support for dq-tools and custom query input.
 - Auto-labels `deprecated` tests for quick & easy identification.
-- Sends succinct and informative messages to a dedicated Slack channel.
 - Creates and updates Jira tickets with the latest tests' metadata.
+- Sends succinct and informative messages to a dedicated Slack channel.
 
-### Supported Source Modules (DWH connections)
-- Snowflake
-- CSV file
-
-### Supported Package Modules (parsing dbt test results):
-
-- dq-tools [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
-- Custom query
-
-### Supported Alert Modules (alert/ notification):
-
-- Jira
-- Slack
-
-> dbt alert rant 🟢 🟡 🔴 ⚫ - by `diqu` OG Contributors </br>
->_Run errors are red,_</br>
->_Test warnings are yellow,_</br>
->_Where's my bug alert,_</br>
->_And joint bugfix workflow?_
+> **dbt alert rant 🟢 🟡 🔴 ⚫** </br></br>
+> _"Run errors are red,_</br>
+> _Test warnings are yellow,_</br>
+> _Where's my bug alert,_</br>
+> _And joint bugfix workflow?"_</br></br>
+> _-- by `diqu` OG Contributors_ </br>
 
 <img src="./docs/assets/img/diqu_concept.jpeg" alt="diqu Concept"> <!-- markdownlint-disable no-inline-html -->
+
+### Supported Modules
+
+- Sources (DWH connections)
+  - Snowflake
+  - CSV file
+- Package (parsing dbt test results)
+  - [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
+  - Custom query
+- Alert Modules (alert/ notification)
+  - Jira
+  - Slack
 
 ## Installation
 
@@ -90,6 +89,7 @@ pip install "snowflake-connector-python[secure-local-storage]"
 ```
 
 ## Alert Modules Configurations
+
 ### Slack
 
 - Use the environment variables to configure the Slack Channel:
@@ -97,12 +97,12 @@ pip install "snowflake-connector-python[secure-local-storage]"
     ```bash
     export SLACK_TOKEN=your_token
     export SLACK_CHANNEL=your_channel_name
-    ```
-    ```bash
+    
     diqu alert --to slack
     ```
 
 ### Jira Board
+
 - Use the environment variables to configure the JIRA Board:
 
     ```bash
@@ -112,8 +112,7 @@ pip install "snowflake-connector-python[secure-local-storage]"
     export JIRA_PROJECT_ID=your_project_id e.g. 106413
     export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
     export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
-    ```
-    ```bash
+
     diqu alert --to jira
     ```
 
@@ -125,7 +124,7 @@ This Auto Alert (`diqu`) tool is an open-source software. Whether you are a seas
 
 👉 See [CONTRIBUTING guideline](https://diqu.iflambda.com/latest/nav/dev/contributing.html) for more details or check out [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-👉 And then, kudos to **our beloved Contributors**:
+🌟 And then, kudos to **our beloved Contributors**:
 
 <a href="https://github.com/infinitelambda/diqu/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=infinitelambda/diqu" />
@@ -133,9 +132,9 @@ This Auto Alert (`diqu`) tool is an open-source software. Whether you are a seas
 
 ## About Infinite Lambda
 
-Infinite Lambda is a cloud and data consultancy. We build strategies, help organisations implement them and pass on the expertise to look after the infrastructure.
+Infinite Lambda is a cloud and data consultancy. We build strategies, help organizations implement them, and pass on the expertise to look after the infrastructure.
 
-We are an Elite Snowflake Partner, a Platinum dbt Partner and two-times Fivetran Innovation Partner of the Year for EMEA.
+We are an Elite Snowflake Partner, a Platinum dbt Partner, and two-times Fivetran Innovation Partner of the Year for EMEA.
 
 Naturally, we love exploring innovative solutions and sharing knowledge, so go ahead and:
 

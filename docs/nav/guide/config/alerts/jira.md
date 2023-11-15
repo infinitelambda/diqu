@@ -11,10 +11,10 @@ Besides basic credentials such as `JIRA_SERVER`, `JIRA_AUTH_USER`, `JIRA_AUTH_PA
 - Only 1 `Done` status under the `Done` status category. We are using `Done` as a filter for open issues, so something like `Archived` under `Done` category would mess up the update logic.
 - A dedicated `JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY`. This is the issue summary suffix to identify issues that we should manage using the module with other issues from the same Jira project. Defaults to "dq-tools"
 
-## Jira module config variables & CLI commands:
+## Jira module config variables & CLI commands
 
-- `JIRA_SERVER` = your_jira_server (e.g. https://your_value.atlassian.net/)
-- `JIRA_AUTH_USER` = your_service_account (e.g. dqt_user@your_value.com)
+- `JIRA_SERVER` = your_jira_server (e.g. `https://your_value.atlassian.net/`)
+- `JIRA_AUTH_USER` = your_service_account (e.g. `user@your_value.com`)
 - `JIRA_AUTH_PASSWORD` = your_service_token (e.g. ATATTxxxxx)
 - `JIRA_PROJECT_ID` = your_project_id (e.g. 123456)
 - `JIRA_ISSUE_TYPE` = your_issue_type (default to "Bug")
@@ -38,6 +38,7 @@ diqu alert --to jira
 ```
 
 ## Issue summary (title)
+
 The issue's summary (aka issue's title) consists of the following parts:
 > Status of the latest execution + test_id(hash) + issue filter
 
@@ -47,6 +48,7 @@ Example: `🟡 | Warning in test: accepted_values_my_first_dbt_model_id__False__
 > On the other hand, generic test IDs change if we modify their contents, so the module will in turn create a new issue instead.
 
 ## The relationship between Jira issue and the DBT test
+
 A Jira issue (aka a Jira ticket - defined by `issue_key`) corresponding to 01 dbt test (defined by `test_id`).
 
 Even though there might be multiple executions of 1 test in our test_results table, all of these executions' metadata are displayed in the same Jira issue if the issue is still in the `open` state (issue' status != `Done`)
@@ -56,10 +58,10 @@ In the case where our `test_id` latest status is not `pass`, and the previous co
 In short:
 
 - A new issue is created when:
-    - Latest test status != `pass`
-    - There is no corresponding `issue_key`, or the previous `issue_key` has been marked `Done`
+  - Latest test status != `pass`
+  - There is no corresponding `issue_key`, or the previous `issue_key` has been marked `Done`
 - A current issue is updated when:
-    - There is a corresponding `issue_key` that is not marked `Done`
+  - There is a corresponding `issue_key` that is not marked `Done`
 
 ## Automatically mark a Jira Issue as `Done` ✅
 
@@ -70,24 +72,26 @@ The reason is the fluctuations in some test results. We have experienced cases w
 Therefore, until there's a unified approach to this problem, marking Done each Jira issue should be done manually after a thorough assessment of previous statuses.
 
 ## Test metadata in Jira issue
+
 Below is the list of test metadata displayed in a Jira issue, and the corresponding issue's component [ `Summary`, `Description`, `Labels` ]  that they are in:
 
 - Test metadata:
-    - Test ID [ `Summary` & `Description` ]
-    - Test tags [ `Labels` ]
+  - Test ID [ `Summary` & `Description` ]
+  - Test tags [ `Labels` ]
 - Latest execution metadata [ `Description` ]
-    - Latest Status: warn
-    - Latest Run Timestamp
-    - Latest Run Failed Rate
+  - Latest Status: warn
+  - Latest Run Timestamp
+  - Latest Run Failed Rate
 - Arrays of previous executions' metadata [ `Description` ]
-    - Previous statuses
-    - Previous run timestamps (UTC)
-    - Previous # of failed records
-    - Previous # of scanned records
+  - Previous statuses
+  - Previous run timestamps (UTC)
+  - Previous # of failed records
+  - Previous # of scanned records
 
 ### Issue description sample
 
 A sample issue description is as follows:
+
 >- Test ID: — "MY_FIRST_DBT_MODEL"|id|||test.diqu_dev.accepted_values_my_first_dbt_model_id_False1_2.ee252c12b8 —
 >- Latest Status: warn
 >- Latest Run Timestamp: 2023-11-14 09:29:42.456000 (UTC)
@@ -99,4 +103,6 @@ A sample issue description is as follows:
 >- tag 1: accepted values
 >- tag 2: Accuracy
 >
->Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
+> Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
+
+![Alt text](/assets/img/diqu-alert--jira.png)

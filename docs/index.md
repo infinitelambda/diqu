@@ -22,37 +22,17 @@ This tool is designed for individuals or teams seeking to automate the managemen
 - Sends succinct and informative messages to a dedicated Slack channel.
 - Creates and updates Jira tickets with the latest tests' metadata.
 
-### Supported Source Modules (DWH connections)
-- Snowflake
-- CSV file
+### Supported Modules
 
-### Supported Package Modules (parsing dbt test results):
-
-- dq-tools [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
-- Custom query
-
-### Supported Alert Modules (alert/ notification):
-
-- Jira
-- Slack
-
-
-## Installation
-
-<div class="termynal" data-termynal data-ty-typeDelay="40" data-ty-lineDelay="700"> <!-- markdownlint-disable no-inline-html -->
-    <span data-ty="input">pip install diqu --upgrade</span>
-    <span data-ty="progress"></span>
-    <span data-ty>Successfully installed diqu</span>
-    <a href="#" data-terminal-control="">restart ↻</a>
-</div>
-
-📓 _NOTE_: The required Data Warehouse (DWH) module should already be installed if you are using `diqu` in a working dbt project. If not, please perform additional steps to install these DWH modules.
-For example, if you're using Snowflake:
-
-```bash
-pip install "snowflake-connector-python[pandas]"
-pip install "snowflake-connector-python[secure-local-storage]"
-```
+- Sources (DWH connections)
+  - Snowflake
+  - CSV file
+- Package (parsing dbt test results)
+  - [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
+  - Custom query
+- Alert Modules (alert/ notification)
+  - Jira
+  - Slack
 
 ## Concept
 
@@ -73,19 +53,11 @@ Let's face it, the dbt result log is not built for alerting or team bugfix colla
 
 `diqu` reads your test results table (provided by dbt packages that parse result log, such as [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)), transform it into simple yet insightful bug metadata, and send it to your output of choices. The output platforms are modularized, which enables contributors to improve & add more modules if needed.
 
+## Basic Usage
 
-## Usage
-  ```bash
-  # define the query params
-  export ISSUE_DEPRECATED_WINDOW_IN_DAYS=your_issue_deprecation_time_in_day, default to "3"
-  export ISSUE_UPDATE_WINDOW_IN_DAYS=your_issue_historical_data_update_window_in_days, default to "14"
-
-  # build dq-tools log table
-  dbt run -s dq_tools
-  ```
-  ```bash
-  diqu alert --to slack --to jira
-  ```
+```bash
+diqu alert --to slack --to jira
+```
 
 ```log
 04:33:17  diqu: INFO - Run with diqu==1.0.0 🏃
@@ -99,53 +71,19 @@ Let's face it, the dbt result log is not built for alerting or team bugfix colla
 04:33:23  diqu: INFO - ✅ Done > JIRA
 ```
 
-## Alert Modules Configurations
-### Slack
-
-- Use the environment variables to configure the Slack Channel:
-
-  <details> <!-- markdownlint-disable no-inline-html -->
-    <summary>preflight</summary>
-
-    ```bash
-    export SLACK_TOKEN=your_token
-    export SLACK_CHANNEL=your_channel_name
-    ```
-
-  </details>
-
-    ```bash
-    diqu alert --to slack
-    ```
-
-### Jira Board
-- Use the environment variables to configure the JIRA Board:
-
-  <details> <!-- markdownlint-disable no-inline-html -->
-    <summary>preflight</summary>
-
-    ```bash
-    export JIRA_SERVER=your_jira_server e.g. https://your_value.atlassian.net/
-    export JIRA_AUTH_USER=your_service_account e.g. dqt_user@your_value.com
-    export JIRA_AUTH_PASSWORD=your_service_token e.g. ATATTxxxxx
-    export JIRA_PROJECT_ID=your_project_id e.g. 106413
-    export JIRA_ISSUE_TYPE=your_issue_type, default to "Bug"
-    export JIRA_OPEN_ISSUES_FILTER_BY_SUMMARY=your_issue_filter_on_title, default to "dq-tools"
-    ```
-
-  </details>
-
-    ```bash
-    diqu alert --to jira
-    ```
-
-> For more details, please visit [the documentation site](https://diqu.iflambda.com/latest/).
+> For more details, please jump to [the User Guide page](./nav/guide/common.html) or the [Quick Start](./nav/guide/quick_start.html) page.
 
 ## How to Contribute
 
 This Auto Alert (`diqu`) tool is an open-source software. Whether you are a seasoned open-source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
 
 👉 See [CONTRIBUTING guideline](./nav/dev/contributing.html) for more details
+
+🌟 And then, kudos to **our beloved Contributors**:
+
+<a href="https://github.com/infinitelambda/diqu/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=infinitelambda/diqu" />
+</a>
 
 ## About Infinite Lambda
 

@@ -21,6 +21,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/quick_start.html</loc>
+         <lastmod>2023-11-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/usage_stats.html</loc>
          <lastmod>2023-11-15</lastmod>
          <changefreq>daily</changefreq>

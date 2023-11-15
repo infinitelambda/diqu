@@ -24,7 +24,7 @@ No matter what CLI tool you use, it is required to query and save data into a `.
 
 The default file name is `csv__data.csv`.
 
-The file's schema **must be** defined with the same column names as specified in [Custom Query Config](./nav/guide/config/packages/custom_query.html)
+The file's schema **must be** defined with the same column names as specified in [Custom Query Config](../packages/custom_query.html)
 
 ## 3. Alerting
 

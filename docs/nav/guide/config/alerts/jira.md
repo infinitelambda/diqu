@@ -1,4 +1,4 @@
- <!-- markdownlint-disable ul-indent -->
+<!-- markdownlint-disable ul-indent -->
 # Configuration for Jira module
 
 This module creates new Jira issues and/or updates current issues based on your input test results.

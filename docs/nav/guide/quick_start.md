@@ -48,7 +48,7 @@ diqu_demo:
   target: dev
 ```
 
-See more details in [here](./nav/guide/config/sources/snowflake.html).
+See more details in [here](./config/sources/snowflake.html).
 
 Or, for just the csv file as the connection:
 
@@ -62,7 +62,7 @@ diqu_demo:
   target: dev
 ```
 
-> In this case, we need to download data into `csv__data.csv` file and put it under `.cache` directory. See how the file is schema-ed [here](./nav/guide/config/packages/custom_query.html).
+> In this case, we need to download data into `csv__data.csv` file and put it under `.cache` directory. See how the file is schema-ed [here](./config/packages/custom_query.html).
 
 ## 3. Usage
 
@@ -135,4 +135,4 @@ Then, go alert:
 diqu alert --to jira
 ```
 
-📖 For more details, please jump to the [User Guide](./nav/guide/common.html) page.
+📖 For more details, please jump to the [User Guide](./common.html) page.

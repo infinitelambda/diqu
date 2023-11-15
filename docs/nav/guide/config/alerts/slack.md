@@ -5,9 +5,9 @@ This module creates and sends a short report on the latest dbt test results to a
 ## Slack requirements
 
 - A dedicated channel for this module messages
-- A dedicated Slack bot in the channel & bot token.
-  - [Creating a Slack bot](https://infinitelambda.slack.com/customize/slackbot) ↗️
-  - [Getting your bot token](https://api.slack.com/authentication/token-types#bot) ↗️
+- A dedicated Slack app in the channel & app token.
+  - [Creating a Slack app](https://api.slack.com/start/quickstart) ↗️
+  - [Getting your app token](https://api.slack.com/authentication/token-types#bot) ↗️
 
 ## Slack module config variables & CLI commands
 

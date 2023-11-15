@@ -54,12 +54,12 @@ from    your_table
 
 ### Setting up env vars
 
-Set up Query variables: [Query Variables Config](./nav/guide/config/packages/query_variables.html)
+Set up Query variables: [Query Variables Config](./query_variables.html)
 
 Set up Alert Module variables:
 
-- [JIRA Configuration](./nav/guide/config/alerts/jira.html)
-- [SLACK Configuration](./nav/guide/config/alerts/slack.html)
+- [JIRA Configuration](../alerts/jira.html)
+- [SLACK Configuration](../alerts/slack.html)
 
 ### Executing alert actions
 

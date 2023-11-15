@@ -1,4 +1,4 @@
-<!-- markdownlint-disable code-block-style -->
+<!-- markdownlint-disable code-block-style ul-indent -->
 # diqu
 
 [![Documentation](https://img.shields.io/badge/Documentation-Check%20it%20out%20📖-blue?style=flat)](https://diqu.iflambda.com/latest/)
@@ -24,20 +24,15 @@ This tool is designed for individuals or teams seeking to automate the managemen
 
 ### Supported Modules
 
-#### Sources (DWH connections)
-
-- Snowflake
-- CSV file
-
-#### Packages (parsing dbt test results)
-
-- [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
-- Custom query
-
-#### Alert Modules (alert/ notification)
-
-- Jira
-- Slack
+- Sources (DWH connections)
+    - Snowflake
+    - CSV file
+- Package (parsing dbt test results)
+    - [![dq-tools](https://img.shields.io/badge/dq--tools-hub-FF694B?logo=dbt&logoColor=FF694B)](https://hub.getdbt.com/infinitelambda/dq_tools)
+    - Custom query
+- Alert Modules (alert/ notification)
+    - Jira
+    - Slack
 
 ## Concept ⭐
 

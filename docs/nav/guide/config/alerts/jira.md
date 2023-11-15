@@ -1,3 +1,4 @@
+ <!-- markdownlint-disable ul-indent -->
 # Configuration for Jira module
 
 This module creates new Jira issues and/or updates current issues based on your input test results.
@@ -78,7 +79,7 @@ Therefore, until there's a unified approach to this problem, marking Done each J
 Below is the list of test metadata displayed in a Jira issue, and the corresponding issue's component [ `Summary`, `Description`, `Labels` ]  that they are in:
 
 - Test metadata:
-    - Test ID [ `Summary` & `Description` ]
+    - Test ID [ `Summary` & `Description` ] 
     - Test tags [ `Labels` ]
 - Latest execution metadata [ `Description` ]
     - Latest Status: warn
@@ -109,4 +110,6 @@ A sample issue description is as follows:
 Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
 ```
 
-<img src="../../../assets/img/diqu-alert--jira.png" alt="diqu jira"> <!-- markdownlint-disable no-inline-html -->
+And the example of JIRA issues:
+
+<img src="../../../../assets/img/diqu-alert--jira.png" alt="diqu jira"> <!-- markdownlint-disable no-inline-html -->

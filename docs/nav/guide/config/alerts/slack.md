@@ -52,4 +52,4 @@ Our default Slack message consists of:
 >- [2] :large_yellow_circle: | Warning in test: accepted_values_my_first_dbt_model_id__False__1__2.ee252c12b8 [dq-tools]
 >- [3] :large_yellow_circle: | Warning in test: accepted_values_my_first_dbt_model_id__False__1__2.ee252c12b8 [dq-tools]
 
-<img src="../../../assets/img/diqu-alert--slack.png" alt="diqu slack"> <!-- markdownlint-disable no-inline-html -->
+<img src="../../../../assets/img/diqu-alert--slack.png" alt="diqu slack"> <!-- markdownlint-disable no-inline-html -->

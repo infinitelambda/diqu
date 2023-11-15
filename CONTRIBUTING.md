@@ -46,7 +46,7 @@ There are some tools that will be helpful to you in developing locally. While th
 
 We will buy `poetry` in `diqu` development and testing.
 
-So first install poetry via pip:
+So first install poetry via pip or via the [official installer](https://python-poetry.org/docs/#installing-with-the-official-installer):
 
 ```bash
 python3 -m pip install poetry --upgrade

@@ -60,10 +60,10 @@ In the case where our `test_id` latest status is not `pass`, and the previous co
 In short:
 
 - A new issue is created when:
-  - Latest test status != `pass`
-  - There is no corresponding `issue_key`, or the previous `issue_key` has been marked `Done`
+    - Latest test status != `pass`
+    - There is no corresponding `issue_key`, or the previous `issue_key` has been marked `Done`
 - A current issue is updated when:
-  - There is a corresponding `issue_key` that is not marked `Done`
+    - There is a corresponding `issue_key` that is not marked `Done`
 
 ## Automatically mark a Jira Issue as `Done` ✅
 
@@ -78,33 +78,35 @@ Therefore, until there's a unified approach to this problem, marking Done each J
 Below is the list of test metadata displayed in a Jira issue, and the corresponding issue's component [ `Summary`, `Description`, `Labels` ]  that they are in:
 
 - Test metadata:
-  - Test ID [ `Summary` & `Description` ]
-  - Test tags [ `Labels` ]
+    - Test ID [ `Summary` & `Description` ]
+    - Test tags [ `Labels` ]
 - Latest execution metadata [ `Description` ]
-  - Latest Status: warn
-  - Latest Run Timestamp
-  - Latest Run Failed Rate
+    - Latest Status: warn
+    - Latest Run Timestamp
+    - Latest Run Failed Rate
 - Arrays of previous executions' metadata [ `Description` ]
-  - Previous statuses
-  - Previous run timestamps (UTC)
-  - Previous # of failed records
-  - Previous # of scanned records
+    - Previous statuses
+    - Previous run timestamps (UTC)
+    - Previous # of failed records
+    - Previous # of scanned records
 
 ### Issue description sample
 
 A sample issue description is as follows:
 
->- Test ID: — "MY_FIRST_DBT_MODEL"|id|||test.diqu_dev.accepted_values_my_first_dbt_model_id_False1_2.ee252c12b8 —
->- Latest Status: warn
->- Latest Run Timestamp: 2023-11-14 09:29:42.456000 (UTC)
->- Latest Run Failed Rate: 0.25
->- Previous statuses: ["🟢", "🟢", "🟡", "🟡", "🟡"]
->- Previous run timestamps (UTC): [ "2023-11-07 11:04:10.762", "2023-11-07 10:58:31.607", "2023-11-07 10:52:53.111", "2023-11-07 10:51:24.584", "2023-11-07 10:15:31.166"]
->- Previous # of failed records: [ 1, 1, 1, 1, 1]
->- Previous # of scanned records: [ 4, 4, 4, 4, 4]
->- tag 1: accepted values
->- tag 2: Accuracy
->
-> Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
+```log
+• Test ID: — MY_FIRST_DBT_MODEL|id|||test.diqu_dev.accepted_values_my_first_dbt_model_id_False1_2.ee252c12b8 —
+• Latest Status: warn
+• Latest Run Timestamp: 2023-11-14 09:29:42.456000 (UTC)
+• Latest Run Failed Rate: 0.25
+• Previous statuses: ["🟢", "🟢", "🟡", "🟡", "🟡"]
+• Previous run timestamps (UTC): [ "2023-11-07 11:04:10.762", "2023-11-07 10:58:31.607", "2023-11-07 10:52:53.111", "2023-11-07 10:51:24.584", "2023-11-07 10:15:31.166"]
+• Previous # of failed records: [ 1, 1, 1, 1, 1]
+• Previous # of scanned records: [ 4, 4, 4, 4, 4]
+• tag 1: accepted values
+• tag 2: Accuracy
 
-<img src="assets/img/diqu-alert--jira.png" alt="diqu jira"> <!-- markdownlint-disable no-inline-html -->
+Managed by diqu | modified at 2023-11-14 09:31:58.832864 (UTC)
+```
+
+<img src="../../../assets/img/diqu-alert--jira.png" alt="diqu jira"> <!-- markdownlint-disable no-inline-html -->

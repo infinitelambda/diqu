@@ -33,3 +33,5 @@ jobs:
       - name: Publish site
         run: |
           mike deploy --push --update-aliases ${{ inputs.version }} latest
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}

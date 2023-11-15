@@ -23,7 +23,7 @@ def alert(data, limit: int = 3) -> ResultCode:
     """
     template_sum = string.Template(
         "🧵 *Summary on $date:*\n\n"
-        "  • 🔴 $error_count error(s)\n"
+        "  • 🔴 $fail_count failure(s)\n"
         "  • 🟡 $warn_count warning(s)\n"
         "  • 🟢 $pass_count pass(es)\n"
         "  • ⚫ $deperecated_count deprecation(s)"
@@ -32,7 +32,7 @@ def alert(data, limit: int = 3) -> ResultCode:
     summary = (
         template_sum.substitute(
             date=data["CHECK_TIMESTAMP"].iloc[0],
-            error_count=data[data["TEST_STATUS"] == "fail"].shape[0],
+            fail_count=data[data["TEST_STATUS"] == "fail"].shape[0],
             warn_count=data[data["TEST_STATUS"] == "warn"].shape[0],
             pass_count=data[data["TEST_STATUS"] == "pass"].shape[0],
             deperecated_count=data[data["TEST_STATUS"] == "deprecate"].shape[0],

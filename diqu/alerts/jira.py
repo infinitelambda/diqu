@@ -12,7 +12,7 @@ from diqu.utils.meta import ResultCode
 
 
 def alert(data) -> ResultCode:
-    r = JiraBoard().raise_incidents(data=data)
+    r = JiraBoard().raise_issues(data=data)
     if r == ResultCode.SUCCEEDED:
         logger.info("✅ Done > JIRA")
     return r
@@ -24,7 +24,7 @@ class JiraBoard:
     def __init__(self) -> None:
         """Initialization"""
         self.project_id = os.environ.get("JIRA_PROJECT_ID")
-        self.incident_type = os.environ.get("JIRA_ISSUE_TYPE") or "Bug"
+        self.issue_type = os.environ.get("JIRA_ISSUE_TYPE") or "Bug"
         self.conn = self.get_connection()
 
     def get_connection(self) -> JIRA:
@@ -41,11 +41,11 @@ class JiraBoard:
             ),
         )
 
-    def raise_incidents(self, data: DataFrame) -> ResultCode:
-        """Create | Update the Incident issues
+    def raise_issues(self, data: DataFrame) -> ResultCode:
+        """Create | Update the Issue issues
 
         Args:
-            data (DataFrame): Input incident data
+            data (DataFrame): Input issue data
 
         Returns:
             ResultCode: Result code
@@ -121,7 +121,7 @@ class JiraBoard:
                     current_datetime=datetime.utcnow(),
                 ),
                 summary=row["TEST_TITLE"],
-                issuetype=dict(name=self.incident_type),
+                issuetype=dict(name=self.issue_type),
                 project=dict(id=self.project_id),
                 labels=[
                     "diqu",
@@ -165,7 +165,7 @@ class JiraBoard:
             Any: None or List of created issues
         """
         if data.empty:
-            logger.info("No new incident(s) detected!")
+            logger.info("No new issue(s) detected!")
             return None
         logger.info(f"Creating {len(data)} issue(s) ...")
         return self.conn.create_issues(field_list=self.__build_field_list(data=data))
@@ -180,7 +180,7 @@ class JiraBoard:
             Any:  None or List of updated issues
         """
         if data.empty:
-            logger.info("No open incident(s) need updating!")
+            logger.info("No open issue(s) need updating!")
             return None
         logger.info(f"Updating {len(data)} issue(s) ...")
         results = []

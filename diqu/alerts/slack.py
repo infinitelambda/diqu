@@ -16,7 +16,7 @@ def alert(data, limit: int = 3) -> ResultCode:
 
     Args:
         data (_type_): DataFrame of test results
-        limit (int, optional): Limit the top incidents in details of the alert. Defaults to 3.
+        limit (int, optional): Limit the top issues in details of the alert. Defaults to 3.
 
     Returns:
         ResultCode: Result code
@@ -28,7 +28,7 @@ def alert(data, limit: int = 3) -> ResultCode:
         "  • 🟢 $pass_count pass(es)\n"
         "  • ⚫ $deperecated_count deprecation(s)"
     )
-    template_incident = string.Template("[$index] $incident\n")
+    template_issue = string.Template("[$index] $issue\n")
     summary = (
         template_sum.substitute(
             date=data["CHECK_TIMESTAMP"].iloc[0],
@@ -40,21 +40,21 @@ def alert(data, limit: int = 3) -> ResultCode:
         if not data.empty
         else "(No Data)"
     )
-    incident_data = (
+    issue_data = (
         data[(data["TEST_STATUS"] != "pass") & (data["TEST_STATUS"] != "deprecate")]
         .sort_values("PRIORITY", ascending=True)
         .head(limit)
     )
 
-    if incident_data.empty:
+    if issue_data.empty:
         logger.info("✅ Empty Data | No Alert required > Slack")
         return ResultCode.SUCCEEDED
 
-    incidents = ""
-    for i in range(len(incident_data)):
-        incidents += template_incident.substitute(
+    issues = ""
+    for i in range(len(issue_data)):
+        issues += template_issue.substitute(
             index=i + 1,
-            incident=incident_data.iloc[i, 0],  # first column: TEST_TITLE
+            issue=issue_data.iloc[i, 0],  # first column: TEST_TITLE
         )
 
     r = Slack().post_message(
@@ -65,7 +65,7 @@ def alert(data, limit: int = 3) -> ResultCode:
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": f"👉 *Top {limit} Issues*:\n\n{incidents or '(No Data)'}",
+                    "text": f"👉 *Top {limit} Issues*:\n\n{issues or '(No Data)'}",
                 },
             },
         ]

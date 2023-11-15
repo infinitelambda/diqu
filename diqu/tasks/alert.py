@@ -10,7 +10,7 @@ class AlertTask(BaseTask):
 
     def __init__(self, **kwargs) -> None:
         """Initilization: Get 3 modules based on the parameters
-        1. Package: where to define the Incident query
+        1. Package: where to define the Issue query
         2. Source: which DWH connnection to open and to execute the query
         3. Alert: define the alert format, and which channels need to send the alerts
         """

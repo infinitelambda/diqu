@@ -67,7 +67,7 @@ class JiraBoard:
                 data=joined.loc[
                     (joined["JIRA_ISSUE_KEY"].isnull())
                     & (joined["TEST_STATUS"] != "pass")
-                    & (joined["TEST_STATUS"] != "deprecated")
+                    & (joined["TEST_STATUS"] != "deprecate")
                 ]
             )
             self.__update_issues(

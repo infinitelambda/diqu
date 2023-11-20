@@ -2,67 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/index.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/dev/contributing.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/cli.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/common.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/quick_start.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/usage_stats.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/alerts/jira.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/alerts/slack.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/packages/custom_query.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/packages/dq-tools.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/packages/query_variables.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/sources/custom_csv.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://infinitelambda.github.io/diqu/0.1/nav/guide/config/sources/snowflake.html</loc>
-         <lastmod>2023-11-15</lastmod>
+         <lastmod>2023-11-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

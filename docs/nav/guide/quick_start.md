@@ -136,3 +136,7 @@ diqu alert --to jira
 ```
 
 📖 For more details, please jump to the [User Guide](./common.html) page.
+
+## Quick Demo
+
+[![Watch the video](https://cdn.loom.com/sessions/thumbnails/e9bdbae1b455497d9eaf4ca9518b5797-1697091988047-with-play.gif)](https://www.loom.com/embed/8d970dfe333c450f8f6d3859458cac99?sid=7a4a17d8-7b5d-439d-b954-167afddb63d5)

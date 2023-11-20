@@ -118,6 +118,10 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
 📖 For more details, please visit [the documentation site](https://diqu.iflambda.com/latest/).
 
+## Quick Demo
+
+[![Watch the video](https://cdn.loom.com/sessions/thumbnails/e9bdbae1b455497d9eaf4ca9518b5797-1697091988047-with-play.gif)](https://www.loom.com/embed/8d970dfe333c450f8f6d3859458cac99?sid=7a4a17d8-7b5d-439d-b954-167afddb63d5)
+
 ## How to Contribute
 
 This Auto Alert (`diqu`) tool is an open-source software. Whether you are a seasoned open-source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.

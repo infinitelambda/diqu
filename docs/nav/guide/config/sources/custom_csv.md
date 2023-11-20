@@ -29,5 +29,7 @@ The file's schema **must be** defined with the same column names as specified in
 ## 3. Alerting
 
 ```bash
-diqu alert --query-dir ./.cache --query_file csv__data.csv --target dev
+diqu alert --target dev \
+  --query-dir ./.cache --query_file csv__data.csv
+  --package csv
 ```

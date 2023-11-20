@@ -120,7 +120,7 @@ pip install "snowflake-connector-python[secure-local-storage]"
 
 ## Quick Demo
 
-[![Watch the video](https://cdn.loom.com/sessions/thumbnails/e9bdbae1b455497d9eaf4ca9518b5797-1697091988047-with-play.gif)](https://www.loom.com/embed/8d970dfe333c450f8f6d3859458cac99?sid=7a4a17d8-7b5d-439d-b954-167afddb63d5)
+[![Watch the video](https://cdn.loom.com/sessions/thumbnails/8d970dfe333c450f8f6d3859458cac99-1700469864888-with-play.gif)](https://www.loom.com/share/8d970dfe333c450f8f6d3859458cac99?sid=b5542b91-ca6d-42a9-b80f-55f85674ec21)
 
 ## How to Contribute
 

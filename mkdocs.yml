@@ -26,6 +26,7 @@ nav:
         - Slack Config: nav/guide/config/alerts/slack.md
         - JIRA Config: nav/guide/config/alerts/jira.md
       - Anonymous usage stats: nav/guide/config/usage_stats.md
+      - Contribute to adapters: nav/guide/adapters/community_adapter.md
     - CLI Reference: nav/guide/cli.md
     - Contribution Guideline: nav/dev/contributing.md
     - Change Log ↗️: https://github.com/infinitelambda/diqu/releases" target="_blank

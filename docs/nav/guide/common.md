@@ -4,9 +4,9 @@
 
 `diqu` CLI is built in the modular approach with 3 main ones:
 
-1. **Source Modules**: Build **_Data Source connections_** (e.g. [Snowflake](./config/sources/snowflake.html), [csv file](./config/sources/custom_csv.html))
-2. **Package Modules**: Manage the **_Query_** of the issues captured (e.g. `dq-tools`'s [query](./config/packages/dq-tools.html))
-3. **Alert Modules**: Define how to **_alert/notify_** the issue **_to which platforms_** (e.g. [Jira](./config/alerts/jira.html), [Slack](./config/alerts/slack.html))
+1. **Source Modules**: Build **_Data Source connections_** (e.g. [Snowflake](config/sources/snowflake.md), [csv file](config/sources/custom_csv.md))
+2. **Package Modules**: Manage the **_Query_** of the issues captured (e.g. `dq-tools`'s [query](config/packages/dq-tools.md))
+3. **Alert Modules**: Define how to **_alert/notify_** the issue **_to which platforms_** (e.g. [Jira](config/alerts/jira.md), [Slack](config/alerts/slack.md))
 
 👉 _See the next pages for more information on how to configure the modules_
 
@@ -29,7 +29,7 @@ Besides the basic dbt test statuses (`pass`, `warn`, `error`), in the built-in q
 
 A test is marked `deprecate` if it's not executed & recorded in a specified number of days.
 
-This can defined by the `ISSUE_DEPRECATED_WINDOW_IN_DAYS` variable (see [Query Variables Config](./config/packages/query_variables.html))
+This can defined by the `ISSUE_DEPRECATED_WINDOW_IN_DAYS` variable (see [Query Variables Config](config/packages/query_variables.md))
 
 Our built-in query also labels each status with its corresponding "traffic lights" 🚥 icon for easier identification (who doesn't love colorful icons in their alerts? 🎉)
 

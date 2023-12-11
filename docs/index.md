@@ -71,13 +71,13 @@ diqu alert --to slack --to jira
 04:33:23  diqu: INFO - ✅ Done > JIRA
 ```
 
-📖 For more details, please jump to [the User Guide page](./nav/guide/common.html) or the [Quick Start](./nav/guide/quick_start.html) page.
+📖 For more details, please jump to [the User Guide page](nav/guide/common.md) or the [Quick Start](nav/guide/quick_start.md) page.
 
 ## How to Contribute
 
 This Auto Alert (`diqu`) tool is an open-source software. Whether you are a seasoned open-source contributor or a first-time committer, we welcome and encourage you to contribute code, documentation, ideas, or problem statements to this project.
 
-👉 See [CONTRIBUTING guideline](./nav/dev/contributing.html) for more details
+👉 See [CONTRIBUTING guideline](nav/dev/contributing.md) for more details
 
 🌟 And then, kudos to **our beloved Contributors**:
 

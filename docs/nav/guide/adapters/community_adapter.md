@@ -1,3 +1,4 @@
+<!-- markdownlint-disable no-inline-html -->
 # Contribute to adapters
 
 Community adapters are plugins contributed and maintained by members of the diqu community. We welcome and encourage contributions to existing adapters or the creation of new adapters (`diqu-{new-adapter}`). Keep in mind that community maintainers are volunteers, so please be kind, understanding, and offer help where possible!
@@ -6,10 +7,29 @@ Community adapters are plugins contributed and maintained by members of the diqu
 
 Anyone can contribute by testing and writing code. If you're interested, check out the open issues in the plugin's source repository. Use the relevant GitHub repo links below:
 
-- Core (`diqu`): [infinitelambda/diqu](https://github.com/infinitelambda/diqu)
-- Email plugin (POC only): [datnguye/diqu-email](https://github.com/datnguye/diqu-email)
+<div class="grid cards" markdown>
 
-**Don't see your adapter**❓ Please help to [open a PR](https://github.com/infinitelambda/diqu/compare) to add your plugin to this documentation.
+- :material-scale-balance:{ .lg .middle } __Core (`diqu`)__
+
+    ---
+
+    Automate and streamline the alerting / notification process for dbt test results using this versatile CLI companion tool. Receive detailed alerts & test metadata seamlessly on various platforms, promoting improved collaboration on dbt project issues 🐞🚀.
+
+    [:octicons-arrow-right-24: infinitelambda/diqu](https://github.com/infinitelambda/diqu)
+
+    [:octicons-arrow-right-24: License](https://github.com/infinitelambda/diqu/blob/main/LICENSE)
+
+- :material-scale-balance:{ .lg .middle } __(Sample only) Email (`diqu-email`)__
+
+    ---
+
+    diqu Adapter: Email
+
+    [:octicons-arrow-right-24: datnguye/diqu-email](https://github.com/datnguye/diqu-email)
+
+</div>
+
+**Don't see your adapter lising here**❓ Please help to [open a PR](https://github.com/infinitelambda/diqu/issues/new/?title=[NEW ADAPTER]+Add+{your-adapter}+adapter) to add your plugin to this documentation.
 
 ## Create a new adapter
 
@@ -21,9 +41,9 @@ Since this package is built with [the modular approach](../common.md), the adapt
 
 All projects are not the same:
 
-- [Package] _How do we capture the test result logs or any other similar data?_ We use `dq-tools` but it doesn't enforce everyone to follow the same in order to use `diqu`
-- [Source] _Which database are we using in the project? We built Snowflake and CSV connection but you will want it to support Big Query for example_
-- [Alert] _Ways to alert the Incidents/Anomalies:_ to JIRA or to Azure DevOps? to Slack or to Email? What should be the content of the alert?
+- [**Package**] _How do we capture the test result logs or any other similar data?_ We use `dq-tools` but it doesn't enforce everyone to follow the same in order to use `diqu`
+- [**Source**] _Which database are we using in the project? We built Snowflake and CSV connection but you will want it to support Big Query for example_
+- [**Alert**] _Ways to alert the Incidents/Anomalies:_ to JIRA or to Azure DevOps? to Slack or to Email? What should be the content of the alert?
 
 ### 2. Prerequisites
 
@@ -232,6 +252,6 @@ Many community members maintain their adapter plugins under open source licenses
 
 - Hosting on a public git provider (for example, GitHub or Gitlab)
 - Publishing to [PyPI](https://pypi.org/)
-- Open a PR to this page under [Contribute to the existing adapters](#contribute-to-the-existing-adapters) section
+- [Open a PR](https://github.com/infinitelambda/diqu/issues/new/?title=[NEW ADAPTER]+Add+{your-adapter}+adapter) to this page under [Contribute to the existing adapters](#contribute-to-the-existing-adapters) section
 
 **_Happy Coding 🚀_**

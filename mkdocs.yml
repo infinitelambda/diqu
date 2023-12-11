@@ -26,9 +26,9 @@ nav:
         - Slack Config: nav/guide/config/alerts/slack.md
         - JIRA Config: nav/guide/config/alerts/jira.md
       - Anonymous usage stats: nav/guide/config/usage_stats.md
-      - Contribute to adapters: nav/guide/adapters/community_adapter.md
     - CLI Reference: nav/guide/cli.md
     - Contribution Guideline: nav/dev/contributing.md
+    - Contribute to adapters ❤️: nav/guide/adapters/community_adapter.md
     - Change Log ↗️: https://github.com/infinitelambda/diqu/releases" target="_blank
 
 theme:
@@ -142,8 +142,8 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span

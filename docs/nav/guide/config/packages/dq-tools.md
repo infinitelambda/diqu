@@ -50,7 +50,7 @@ dbt build --vars '{dq_tools_enable_store_test_results: true}'
 
 ### Setting up env vars
 
-Set up Query variables: [Query Variables Config](./query_variables.html)
+Set up Query variables: [Query Variables Config](./query_variables.md)
 
 Set up Alert Module variables:
 

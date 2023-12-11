@@ -155,7 +155,10 @@ And your diqu command won't be change, but you should make sure the value of `<n
   | - README.md
 ```
 
-In `pyproject.toml` file, the content should be:
+In `pyproject.toml` file, the content should be as following template:
+
+<details> <!-- markdownlint-disable no-inline-html -->
+  <summary>Click me</summary>
 
 ```yaml
 [tool.poetry]
@@ -238,6 +241,8 @@ test-cov = [
   {cmd = "coverage xml"},
 ]
 ```
+
+</details>
 
 ### 4. Test your adapter
 

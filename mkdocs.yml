@@ -50,24 +50,26 @@ theme:
     - search.share
     - search.suggest
     - toc.follow
+
   palette:
     - media: "(prefers-color-scheme)"
       primary: black
-      scheme: slate
       toggle:
         icon: material/brightness-auto
         name: Switch to light mode
     - media: "(prefers-color-scheme: light)"
       primary: black
+      scheme: default
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       primary: black
-      scheme: default
+      scheme: slate
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+
   font:
     text: Roboto
     code: Roboto Mono

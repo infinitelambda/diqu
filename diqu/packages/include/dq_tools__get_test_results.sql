@@ -77,7 +77,7 @@ final as (
 
     select  latest_status.test_id
             ,case
-                when datediff(day, latest_status.check_timestamp, sysdate()) >= $deprecated_window_in_days then 'deprecate'
+                when test_status != 'pass' and datediff(day, latest_status.check_timestamp, sysdate()) >= $deprecated_window_in_days then 'deprecate'
                 else latest_status.test_status
             end as test_status_add_deprecation
             ,case

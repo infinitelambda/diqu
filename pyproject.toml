@@ -44,7 +44,7 @@ autoflake = "^2.0.1"
 pytest = "^7.2.0"
 pytest-sugar = "^0.9.6"
 coverage = {version = "^6.5.0", extras = ["toml"]}
-pdoc = "^14.1.0"
+pdoc = "^14.5.1"
 mkdocs = "^1.5.3"
 mkdocs-material = "^9.4.8"
 mkdocs-minify-plugin = "^0.7.1"

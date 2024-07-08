@@ -29,6 +29,7 @@ nav:
     - CLI Reference: nav/guide/cli.md
     - Contribution Guideline: nav/dev/contributing.md
     - Contribute to adapters ❤️: nav/guide/adapters/community_adapter.md
+    - Using custom module script 💡: using_custom_module_script.md
     - Change Log ↗️: https://github.com/infinitelambda/diqu/releases" target="_blank
 
 theme:

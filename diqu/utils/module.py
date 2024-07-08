@@ -22,7 +22,7 @@ def load_module(name: str, package: str = "diqu") -> ModuleType:
     with exception.handle_module_errors(name, module_name):
         try:
             mod = import_module(name=f".{name}", package=package)
-        except:
+        except Exception:
             mod = None
             logger.debug(f"Import {module_name} module failed, trying local path...")
 

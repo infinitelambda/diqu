@@ -47,7 +47,7 @@ def alert(data) -> ResultCode:
     return ResultCode.SUCCEEDED # return the ResultCode value
 ```
 
-## 3. Run `diqu` with the custom module script
+## Run `diqu` with the custom module script
 
 Run `diqu alert -h` to inspect the usage for using custom:
 

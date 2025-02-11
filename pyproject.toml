@@ -35,7 +35,7 @@ slack-sdk = "^3.23.0"
 numpy = "<2.0"
 
 [tool.poetry.dev-dependencies]
-snowflake-connector-python = {version = "^3.12.3", extras = ["secure-local-storage", "pandas"]}
+snowflake-connector-python = {version = "^3.13.1", extras = ["secure-local-storage", "pandas"]}
 pre-commit = "^2.17.0"
 poethepoet = "^0.16.4"
 black = "^24.3.0"
